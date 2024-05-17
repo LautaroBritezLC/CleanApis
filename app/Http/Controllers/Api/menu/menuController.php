@@ -11,21 +11,21 @@ class menuController extends Controller{
     public function SP_GetMenu(Request $request) {
         // Validar el token
         $validator = Validator::make($request->all(), [
-            'token' => 'required|string', // Puedes agregar reglas de validación adicionales según tus necesidades
+            'Token' => 'required|string', // Puedes agregar reglas de validación adicionales según tus necesidades
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Error en la validación del token',
-                'errors' => $validator->errors(),
-                'status' => 400,
+                'Message' => 'Error en la validación del token',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
             ], 400);
         }
 
 
         // Obtener el token de la solicitud
-        $token = $request->input('token');
+        $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SP_GetMenu
         $menues = DB::select('CALL SP_GetMenu(?)', [$token]);
@@ -33,9 +33,9 @@ class menuController extends Controller{
         // Procesar los resultados del procedimiento almacenado según sea necesario
         // En este ejemplo, simplemente devolvemos los resultados como parte de la respuesta JSON
         return response()->json([
-            'message' => 'OK',
-            'status' => 200,
-            'menues' => $menues,
+            'Message' => 'OK',
+            'Errors' => 200,
+            'Menues' => $menues,
         ], 200);
 
     }
