@@ -11,16 +11,16 @@ class sistemaApiController
     public function SP_SistemaAPIs(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'metodo' => 'required|string', // Método de la API (GET, POST, PUT, DELETE)
-            'nombre' => 'required|string', // Nombre de la API
+            'Metodo' => 'required|string', // Método de la API (GET, POST, PUT, DELETE)
+            'Nombre' => 'required|string', // Nombre de la API
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400,
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
             ], 400);
         }
 
@@ -34,15 +34,15 @@ class sistemaApiController
         // Verificar si el conjunto de menús está vacío
         if (empty($sistemaAPIs)) {
             return response()->json([
-                'message' => 'No se encontraron APIs con el método '.$metodo.' y el nombre '.$nombre,
-                'status' => 404,
+                'Message' => 'No se encontraron APIs con el método '.$metodo.' y el nombre '.$nombre,
+                'Status' => 404,
             ], 404);
         }
 
         return response()->json([
-            'message' => 'OK',
-            'status' => 200,
-            'sistemaAPIs' => $sistemaAPIs,
+            'Message' => 'OK',
+            'Status' => 200,
+            'SistemaAPIs' => $sistemaAPIs,
         ], 200);
 
 

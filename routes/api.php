@@ -51,6 +51,8 @@ use App\Http\Controllers\Api\Parametria\TipoImpuestoController;
 
 use App\Http\Controllers\Api\Parametria\TipoFormaDePagoController;
 
+use App\Http\Controllers\Api\Parametria\SucursalController;
+
 //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
 //LOGIN Y TOKENS
@@ -240,6 +242,20 @@ Route::delete('/SPB_TipoFormaDePago',[TipoFormaDePagoController::class, 'SPB_Tip
 
 //habilitar Tipo FormaDePago
 Route::put('/SPH_TipoFormaDePago',[TipoFormaDePagoController::class, 'SPH_TipoFormaDePago']);
+
+//-------------------------SUBMODULO DE Sucursal-------------------------
+//listar Tipo Sucursal
+Route::get('/SPL_Sucursal',[SucursalController::class, 'SPL_Sucursal']);
+
+//agregar Tipo Sucursal
+Route::post('/SPA_Sucursal',[SucursalController::class, 'SPA_Sucursal']);
+
+//editar Tipo Sucursal
+Route::put('/SPM_Sucursal',[SucursalController::class, 'SPM_Sucursal']);
+
+//borrar Tipo Sucursal
+Route::delete('/SPB_Sucursal',[SucursalController::class, 'SPB_Sucursal']);
+
 
 //hasta aca anda todo
 

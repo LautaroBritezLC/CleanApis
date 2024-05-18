@@ -16,9 +16,9 @@ class UsuariosController extends Controller
 
         // Devolver los resultados obtenidos
         return response()->json([
-            'message' => 'OK',
-            'usuarios' => $resultados,
-            'status' => 200,
+            'Message' => 'OK',
+            'Status' => 200,
+            'Usuarios' => $resultados,
         ], 200);
 
     }
@@ -26,9 +26,9 @@ class UsuariosController extends Controller
     public function SPA_Usuarios(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'idUsuarioCarga' => 'required|integer',
-            'id_persona' => 'required|integer',
-            'nombreUsuario' => [
+            'IdUsuarioCarga' => 'required|integer',
+            'IdPersona' => 'required|integer',
+            'NombreUsuario' => [
                 'required',
                 'string',
                 'min:8',
@@ -38,7 +38,7 @@ class UsuariosController extends Controller
                     }
                 },
             ],
-            'clave' => [
+            'Clave' => [
                 'required',
                 'string',
                 'min:8',
@@ -56,27 +56,49 @@ class UsuariosController extends Controller
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400,
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
             ], 400);
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $idUsuarioCarga = $request->input('idUsuarioCarga');
-        $id_persona = $request->input('id_persona');
-        $nombreUsuario = $request->input('nombreUsuario');
-        $clave = $request->input('clave');
+        $IdUsuarioCarga = $request->input('IdUsuarioCarga');
+        $IdPersona = $request->input('IdPersona');
+        $NombreUsuario = $request->input('NombreUsuario');
+        $Clave = $request->input('Clave');
 
-        echo $idUsuarioCarga  . ' ' . $id_persona . ' ' . $nombreUsuario . ' ' . $clave;
+        // echo $idUsuarioCarga  . ' ' . $id_persona . ' ' . $nombreUsuario . ' ' . $clave;
+
+        // Ejecutar el procedimiento almacenado SPA_Usuarios
+        $resultados = DB::select('CALL SPA_Usuarios(?, ?, ?, ?)', [
+            $IdUsuarioCarga, $IdPersona, $NombreUsuario, $Clave
+        ]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+
 
     }
 
     public function SPM_Usuarios(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'id_usuario' => 'required|integer',
-            'nuevo_usuario' => [
+            'IdUsuario' => 'required|integer',
+            'NuevoUsuario' => [
                 'nullable',
                 'string',
                 'min:8',
@@ -86,7 +108,7 @@ class UsuariosController extends Controller
                     }
                 },
             ],
-            'nueva_clave' => [
+            'NuevaClave' => [
                 'nullable',
                 'string',
                 'min:8',
@@ -104,44 +126,81 @@ class UsuariosController extends Controller
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400,
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
             ], 400);
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id_usuario = $request->input('id_usuario');
-        $nuevo_usuario = $request->input('nuevo_usuario');
-        $nueva_clave = $request->input('nueva_clave');
+        $IdUsuario = $request->input('IdUsuario');
+        $NuevoUsuario = $request->input('NuevoUsuario');
+        $NuevaClave = $request->input('NuevaClave');
 
-        echo $id_usuario  . ' ' . $nuevo_usuario . ' ' . $nueva_clave;
+
+        // Ejecutar el procedimiento almacenado SPM_Usuario
+        $resultados = DB::select('CALL SPM_Usuario(?, ?, ?)', [
+            $IdUsuario, $NuevoUsuario, $NuevaClave
+        ]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
 
     }
 
     public function SPB_Usuarios(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'id_usuario' => 'required|integer',
+            'IdUsuario' => 'required|integer',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400,
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
             ], 400);
         }
 
         // Obtener el id_usuario del cuerpo de la solicitud
-        $id_usuario = $request->input('id_usuario');
+        $id_usuario = $request->input('IdUsuario');
 
-        echo $id_usuario;
+        // echo $id_usuario;
+
+        // Ejecutar el procedimiento almacenado SPB_Usuarios
+        $resultados = DB::select('CALL SPB_Usuarios(?)', [$id_usuario]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'Usuario dado de baja correctamente.') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
 
     }
-
-
 
 
 }
