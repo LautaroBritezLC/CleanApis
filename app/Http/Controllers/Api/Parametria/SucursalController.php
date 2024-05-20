@@ -135,7 +135,7 @@ class SucursalController extends Controller
     public function SPB_Sucursal(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'Id' => 'required|integer',
+            'IdSucursal' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -149,7 +149,7 @@ class SucursalController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id = $request->input('Id');
+        $id = $request->input('IdSucursal');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPB_Sucursal

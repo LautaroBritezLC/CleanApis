@@ -140,7 +140,7 @@ class TipoFormaDePagoController extends Controller
 
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'Id' => 'required|integer',
+            'IdTipoFormaDePago' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -154,7 +154,7 @@ class TipoFormaDePagoController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id = $request->input('Id');
+        $id = $request->input('IdTipoFormaDePago');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPH_TipoProducto
@@ -181,7 +181,7 @@ class TipoFormaDePagoController extends Controller
 
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'Id' => 'required|integer',
+            'IdTipoFormaDePago' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -195,7 +195,7 @@ class TipoFormaDePagoController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id = $request->input('Id');
+        $id = $request->input('IdTipoFormaDePago');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPH_TipoProducto
