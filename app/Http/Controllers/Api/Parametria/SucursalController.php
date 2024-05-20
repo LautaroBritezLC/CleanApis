@@ -11,7 +11,44 @@ class SucursalController extends Controller
 {
 
     public function SPL_Sucursal(Request $request) {
-        echo 'llego';
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'TipoLista' => 'required|integer',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $tipoLista = $request->input('TipoLista');
+
+        // Ejecutar el procedimiento almacenado SPL_Sucursal
+        $resultados = DB::select('CALL SPL_Sucursal(?)', [$tipoLista]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = isset($resultados[0]->Message) ? $resultados[0]->Message : null;
+
+        // Verificar si el mensaje es nulo (para el caso de que el tipo de lista sea válido)
+        if ($mensaje === null) {
+            // Devolver los resultados como respuesta
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+                'Sucursales' => $resultados,
+            ], 200);
+        } else {
+            // Devolver el mensaje de error
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
 
     }
 
