@@ -25,7 +25,7 @@ class TipoPersonaSistemaController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $tipoLista = $request->input('tipoLista');
+        $tipoLista = $request->input('TipoLista');
 
         // Ejecutar el procedimiento almacenado SPL_TipoPersonaSistema
         $resultados = DB::select('CALL SPL_TipoPersonaSistema(?)', [$tipoLista]);
