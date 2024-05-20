@@ -125,7 +125,7 @@ class tiporolController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id = $request->input('id');
+        $id = $request->input('IdTipoRol');
         $token = $request->input('Token');
 
 
@@ -219,7 +219,7 @@ class tiporolController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdTipoRol = $request->input('idTipoRol');
+        $IdTipoRol = $request->input('IdTipoRol');
         $Token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPH_TipoRol
