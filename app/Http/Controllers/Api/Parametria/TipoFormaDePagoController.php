@@ -39,7 +39,7 @@ class TipoFormaDePagoController extends Controller
             return response()->json([
                 'Message' => 'OK',
                 'Status' => 200,
-                'TipoProducto' => $resultados,
+                'TipoFormaDePago' => $resultados,
             ], 200);
         } else {
             // Devolver el mensaje de error
