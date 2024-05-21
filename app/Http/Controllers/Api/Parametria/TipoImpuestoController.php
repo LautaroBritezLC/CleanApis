@@ -39,7 +39,7 @@ class TipoImpuestoController extends Controller
             return response()->json([
                 'Message' => 'OK',
                 'Status' => 200,
-                'TipoProducto' => $resultados,
+                'TipoImpuesto' => $resultados,
             ], 200);
         } else {
             // Devolver el mensaje de error
