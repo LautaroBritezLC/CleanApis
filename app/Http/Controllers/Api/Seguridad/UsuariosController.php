@@ -28,7 +28,7 @@ class UsuariosController extends Controller
         $validator = Validator::make($request->all(), [
             'IdUsuarioCarga' => 'required|integer',
             'IdPersona' => 'required|integer',
-            'NombreUsuario' => [
+            'Usuario' => [
                 'required',
                 'string',
                 'min:8',
@@ -65,14 +65,14 @@ class UsuariosController extends Controller
         // Obtener los datos del cuerpo de la solicitud
         $IdUsuarioCarga = $request->input('IdUsuarioCarga');
         $IdPersona = $request->input('IdPersona');
-        $NombreUsuario = $request->input('NombreUsuario');
+        $Usuario = $request->input('Usuario');
         $Clave = $request->input('Clave');
 
         // echo $idUsuarioCarga  . ' ' . $id_persona . ' ' . $nombreUsuario . ' ' . $clave;
 
         // Ejecutar el procedimiento almacenado SPA_Usuarios
         $resultados = DB::select('CALL SPA_Usuarios(?, ?, ?, ?)', [
-            $IdUsuarioCarga, $IdPersona, $NombreUsuario, $Clave
+            $IdUsuarioCarga, $IdPersona, $Usuario, $Clave
         ]);
 
         // Obtener el mensaje del resultado
@@ -182,20 +182,23 @@ class UsuariosController extends Controller
         // echo $id_usuario;
 
         // Ejecutar el procedimiento almacenado SPB_Usuarios
+        DB::statement('CALL SPB_Usuarios(?)', [$id_usuario]);
+
+        // Ejecutar el procedimiento almacenado SPB_Usuarios
         $resultados = DB::select('CALL SPB_Usuarios(?)', [$id_usuario]);
 
-        // Obtener el mensaje del resultado
-        $mensaje = $resultados[0]->v_Message;
+        // Verificar si la fila fue actualizada
+        $usuario = DB::table('Usuario')->where('IdUsuario', $id_usuario)->first();
 
-        // Devolver la respuesta según el mensaje obtenido
-        if ($mensaje === 'Usuario dado de baja correctamente.') {
+        // Devolver la respuesta según el resultado obtenido
+        if ($usuario && $usuario->FechaBaja !== null) {
             return response()->json([
-                'Message' => 'OK',
+                'Message' => 'Usuario dado de baja correctamente.',
                 'Status' => 200,
             ], 200);
         } else {
             return response()->json([
-                'Message' => $mensaje,
+                'Message' => 'No se pudo dar de baja al usuario o el usuario no existe.',
                 'Status' => 400,
             ], 400);
         }

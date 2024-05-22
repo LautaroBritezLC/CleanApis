@@ -55,7 +55,7 @@ class TipoImpuestoController extends Controller
 
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'Descripcion' => 'required|string|max:50',
+            'Detalle' => 'required|string|max:50',
             'Porcentaje'=> 'required|integer|max:500',
             'Token' => 'required|string|max:500',
         ]);
@@ -70,12 +70,12 @@ class TipoImpuestoController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $descripcion = $request->input('Descripcion');
+        $detalle = $request->input('Detalle');
         $porcentaje = $request->input('Porcentaje');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPA_TipoProducto
-        $resultados = DB::select('CALL SPA_TipoImpuesto(?, ?,?)', [$descripcion, $porcentaje, $token]);
+        $resultados = DB::select('CALL SPA_TipoImpuesto(?, ?,?)', [$detalle, $porcentaje, $token]);
 
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->v_Message;
@@ -99,7 +99,7 @@ class TipoImpuestoController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdTipoImpuesto' => 'required|integer',
-            'Descripcion' => 'required|string|max:50',
+            'Detalle' => 'required|string|max:50',
             'Porcentaje'=> 'required|integer|max:500',
             'Token' => 'required|string|max:500',
         ]);
@@ -115,12 +115,12 @@ class TipoImpuestoController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $id = $request->input('IdTipoImpuesto');
-        $descripcion = $request->input('Descripcion');
+        $detalle = $request->input('Detalle');
         $porcentaje = $request->input('Porcentaje');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPM_TipoProducto
-        $resultados = DB::select('CALL SPM_TipoImpuesto(?, ?, ?,?)', [$id, $descripcion, $porcentaje , $token]);
+        $resultados = DB::select('CALL SPM_TipoImpuesto(?, ?, ?,?)', [$id, $detalle, $porcentaje , $token]);
 
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->v_Message;
