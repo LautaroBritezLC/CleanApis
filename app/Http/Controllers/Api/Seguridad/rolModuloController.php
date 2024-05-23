@@ -13,7 +13,7 @@ class rolModuloController extends Controller
 
             // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdTipoRol' => '',
+            'IdTipoRol' => 'integer',
             'TipoLista' => 'required|integer|in:1,2', // 1 para activo, 2 para baja
         ]);
 
