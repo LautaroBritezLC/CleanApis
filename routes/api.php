@@ -53,6 +53,8 @@ use App\Http\Controllers\Api\Parametria\TipoFormaDePagoController;
 
 use App\Http\Controllers\Api\Parametria\SucursalController;
 
+use App\Http\Controllers\Api\Parametria\TipoModuloController;
+
 //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
 //LOGIN Y TOKENS
@@ -80,7 +82,7 @@ Route::get('/SP_GetMenuUsuario',[menuController::class, 'SP_GetMenuUsuario']);
 //listar Usuarios
 Route::get('/SPL_Usuarios',[UsuariosController::class, 'SPL_Usuarios']);
 
-//agregar Usuarios 
+//agregar Usuarios
 Route::post('/SPA_Usuarios',[UsuariosController::class, 'SPA_Usuarios']);
 
 //editar Usuarios
@@ -256,6 +258,10 @@ Route::put('/SPM_Sucursal',[SucursalController::class, 'SPM_Sucursal']);
 
 //borrar Tipo Sucursal
 Route::put('/SPB_Sucursal',[SucursalController::class, 'SPB_Sucursal']);
+
+//-------------------------SUBMODULO DE TipoModulo-------------------------
+//listar TipoModulo
+Route::get('/SPL_TipoModulo',[TipoModuloController::class, 'SPL_TipoModulo']);
 
 
 //hasta aca anda todo falta agregar el modulo de recursos
