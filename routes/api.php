@@ -55,6 +55,15 @@ use App\Http\Controllers\Api\Parametria\SucursalController;
 
 use App\Http\Controllers\Api\Parametria\TipoModuloController;
 
+//TODO--------------------------------------MODULO DE RECURSOS--------------------------------------------
+
+use App\Http\Controllers\Api\Recursos\StockController;
+
+use App\Http\Controllers\Api\Recursos\PersonalController;
+
+use App\Http\Controllers\Api\Recursos\ClienteController;
+
+use App\Http\Controllers\Api\Recursos\ProveedorController;
 //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
 //LOGIN Y TOKENS
@@ -263,5 +272,73 @@ Route::put('/SPB_Sucursal',[SucursalController::class, 'SPB_Sucursal']);
 //listar TipoModulo
 Route::get('/SPL_TipoModulo',[TipoModuloController::class, 'SPL_TipoModulo']);
 
+//TODO--------------------------------------MODULO DE RECURSOS--------------------------------------------
+
+//-------------------------SUBMODULO DE Stock-------------------------
+//listar Producto
+Route::get('/SPL_Producto',[StockController::class, 'SPL_Producto']);
+
+//agregar Producto
+Route::post('/SPA_Producto',[StockController::class, 'SPA_Producto']);
+
+//editar Producto
+Route::put('/SPM_Producto',[StockController::class, 'SPM_Producto']);
+
+//borrar Producto
+Route::put('/SPB_Producto',[StockController::class, 'SPB_Producto']);
+
+//habilitar Producto
+Route::put('/SPH_Producto',[StockController::class, 'SPH_Producto']);
+
+
+//-------------------------SUBMODULO DE Personal-------------------------
+//listar Personal
+Route::get('/SPL_Personal',[PersonalController::class, 'SPL_Personal']);
+
+//agregar Personal
+Route::post('/SPA_Personal',[PersonalController::class, 'SPA_Personal']);
+
+//editar Personal
+Route::put('/SPM_Personal',[PersonalController::class, 'SPM_Personal']);
+
+//borrar Personal
+Route::put('/SPB_Personal',[PersonalController::class, 'SPB_Personal']);
+
+//habilitar Personal
+Route::put('/SPH_Personal',[PersonalController::class, 'SPH_Personal']);
+
+
+//-------------------------SUBMODULO DE Cliente-------------------------
+//listar Cliente
+Route::get('/SPL_Cliente',[ClienteController::class, 'SPL_Cliente']);
+
+//agregar Cliente
+Route::post('/SPA_Clientes',[ClienteController::class, 'SPA_Clientes']);
+
+//editar Cliente
+Route::put('/SPM_Cliente',[ClienteController::class, 'SPM_Cliente']);
+
+//borrar Cliente
+Route::put('/SPB_Cliente',[ClienteController::class, 'SPB_Cliente']);
+
+//habilitar Cliente
+Route::put('/SPH_Cliente',[ClienteController::class, 'SPH_Cliente']);
+
+
+//-------------------------SUBMODULO DE Cliente-------------------------
+//listar Proveedor
+Route::get('/SPL_Proveedor',[ProveedorController::class, 'SPL_Proveedor']);
+
+//agregar Proveedor
+Route::post('/SPA_Proveedor',[ProveedorController::class, 'SPA_Proveedor']);
+
+//editar Proveedor
+Route::put('/SPM_Proveedor',[ProveedorController::class, 'SPM_Proveedor']);
+
+//borrar Proveedor
+Route::put('/SPB_Proveedor',[ProveedorController::class, 'SPB_Proveedor']);
+
+//habilitar Proveedor
+Route::put('/SPH_Proveedor',[ProveedorController::class, 'SPH_Proveedor']);
 
 //hasta aca anda todo falta agregar el modulo de recursos
