@@ -55,7 +55,6 @@ class UsuariosController extends Controller
     public function SPA_Usuarios(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdUsuarioCarga' => 'required|integer',
             'IdPersona' => 'required|integer',
             'Usuario' => [
                 'required',
@@ -80,6 +79,7 @@ class UsuariosController extends Controller
                     }
                 },
             ],
+            'Token' => 'required|string|max:500',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -92,16 +92,16 @@ class UsuariosController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdUsuarioCarga = $request->input('IdUsuarioCarga');
         $IdPersona = $request->input('IdPersona');
         $Usuario = $request->input('Usuario');
         $Clave = $request->input('Clave');
+        $Token = $request->input('Token');
 
         // echo $idUsuarioCarga  . ' ' . $id_persona . ' ' . $nombreUsuario . ' ' . $clave;
 
         // Ejecutar el procedimiento almacenado SPA_Usuarios
         $resultados = DB::select('CALL SPA_Usuarios(?, ?, ?, ?)', [
-            $IdUsuarioCarga, $IdPersona, $Usuario, $Clave
+             $IdPersona, $Usuario, $Clave, $Token
         ]);
 
         // Obtener el mensaje del resultado

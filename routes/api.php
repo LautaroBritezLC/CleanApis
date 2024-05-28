@@ -64,6 +64,11 @@ use App\Http\Controllers\Api\Recursos\PersonalController;
 use App\Http\Controllers\Api\Recursos\ClienteController;
 
 use App\Http\Controllers\Api\Recursos\ProveedorController;
+
+//TODO--------------------------------------LISTAS--------------------------------------------
+
+use App\Http\Controllers\Api\Listas\ListaPersonasController;
+
 //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
 //LOGIN Y TOKENS
@@ -292,6 +297,11 @@ Route::put('/SPH_Producto',[StockController::class, 'SPH_Producto']);
 
 
 //-------------------------SUBMODULO DE Personal-------------------------
+
+//lista persona extra
+//listar Personal
+Route::get('/SP_ListaPersonas',[ListaPersonasController::class, 'SP_ListaPersonas']);
+
 //listar Personal
 Route::get('/SPL_Personal',[PersonalController::class, 'SPL_Personal']);
 

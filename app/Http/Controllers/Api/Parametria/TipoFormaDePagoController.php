@@ -110,7 +110,7 @@ class TipoFormaDePagoController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $id = $request->input('Id');
+        $id = $request->input('IdTipoFormaDePago');
         $descripcion = $request->input('Descripcion');
         $token = $request->input('Token');
 

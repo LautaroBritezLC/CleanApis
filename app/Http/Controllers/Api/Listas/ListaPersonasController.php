@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ListaPersonasController extends Controller
 {
     public function SP_ListaPersonas(Request $request) {
+
     // Ejecutar el procedimiento almacenado SP_ListaPersonas
     $resultados = DB::select('CALL SP_ListaPersonas()');
 
