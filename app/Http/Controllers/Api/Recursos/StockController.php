@@ -24,14 +24,14 @@ class StockController extends Controller
     public function SPA_Producto(Request $request) {
     // Validar los datos de entrada
     $validator = Validator::make($request->all(), [
-        'IdTipoMedida' => 'required|integer',
+        'IdTipoMedidas' => 'required|integer',
         'IdTipoCategoria' => 'required|integer',
         'IdTipoProducto' => 'required|integer',
         'Codigo' => 'required|string|min:8',
         'Nombre' => 'required|string|max:45',
         'Marca' => 'required|string|max:45',
         'PrecioCosto' => 'required|numeric|min:0',
-        'Tamaño' => 'required|numeric|min:0',
+        'Tamano' => 'required|numeric|min:0',
         'CantMinima' => 'required|integer|min:0',
         'CantMaxima' => 'required|integer|min:0',
         'IdUsuarioCarga' => 'required|integer',
@@ -47,27 +47,27 @@ class StockController extends Controller
     }
 
     // Obtener los datos del cuerpo de la solicitud
-    $idTipoMedida = $request->input('IdTipoMedida');
+    $IdTipoMedidas = $request->input('IdTipoMedidas');
     $idTipoCategoria = $request->input('IdTipoCategoria');
     $idTipoProducto = $request->input('IdTipoProducto');
     $codigo = $request->input('Codigo');
     $nombre = $request->input('Nombre');
     $marca = $request->input('Marca');
     $precioCosto = $request->input('PrecioCosto');
-    $tamaño = $request->input('Tamaño');
+    $Tamano = $request->input('Tamano');
     $cantMinima = $request->input('CantMinima');
     $cantMaxima = $request->input('CantMaxima');
     $idUsuarioCarga = $request->input('IdUsuarioCarga');
 
 
-    // echo "idTipoMedida: $idTipoMedida, idTipoCategoria: $idTipoCategoria, idTipoProducto: $idTipoProducto, ";
+    // echo "IdTipoMedidas: $IdTipoMedidas, idTipoCategoria: $idTipoCategoria, idTipoProducto: $idTipoProducto, ";
     // echo "codigo: $codigo, nombre: $nombre, marca: $marca, precioCosto: $precioCosto, ";
-    // echo "tamaño: $tamaño, cantMinima: $cantMinima, cantMaxima: $cantMaxima, idUsuarioCarga: $idUsuarioCarga";
+    // echo "Tamano: $Tamano, cantMinima: $cantMinima, cantMaxima: $cantMaxima, idUsuarioCarga: $idUsuarioCarga";
 
 
     // Ejecutar el procedimiento almacenado SPA_Producto
     $resultados = DB::select('CALL SPA_Producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-        $idTipoMedida, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, $precioCosto, $tamaño, $cantMinima, $cantMaxima, $idUsuarioCarga
+        $IdTipoMedidas, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, $precioCosto, $Tamano, $cantMinima, $cantMaxima, $idUsuarioCarga
     ]);
 
     // Obtener el mensaje del resultado
@@ -91,14 +91,14 @@ class StockController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdProducto' => 'required|integer',
-            'IdTipoMedida' => 'required|integer',
+            'IdTipoMedidas' => 'required|integer',
             'IdTipoCategoria' => 'required|integer',
             'IdTipoProducto' => 'required|integer',
             'Codigo' => 'required|string|min:8',
             'Nombre' => 'required|string|max:45',
             'Marca' => 'required|string|max:45',
             'PrecioCosto' => 'required|numeric|min:0',
-            'Tamaño' => 'required|numeric|min:0',
+            'Tamano' => 'required|numeric|min:0',
             'CantMinima' => 'required|integer|min:0',
             'CantMaxima' => 'required|integer|min:0',
             'IdUsuarioCarga' => 'required|integer',
@@ -115,22 +115,22 @@ class StockController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $idProducto = $request->input('IdProducto');
-        $idTipoMedida = $request->input('IdTipoMedida');
+        $IdTipoMedidas = $request->input('IdTipoMedidas');
         $idTipoCategoria = $request->input('IdTipoCategoria');
         $idTipoProducto = $request->input('IdTipoProducto');
         $codigo = $request->input('Codigo');
         $nombre = $request->input('Nombre');
         $marca = $request->input('Marca');
         $precioCosto = $request->input('PrecioCosto');
-        $tamaño = $request->input('Tamaño');
+        $Tamano = $request->input('Tamano');
         $cantMinima = $request->input('CantMinima');
         $cantMaxima = $request->input('CantMaxima');
         $idUsuarioCarga = $request->input('IdUsuarioCarga');
 
         // Ejecutar el procedimiento almacenado SPM_Producto
         $resultados = DB::select('CALL SPM_Producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-            $idProducto, $idTipoMedida, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, 
-            $precioCosto, $tamaño, $cantMinima, $cantMaxima, $idUsuarioCarga
+            $idProducto, $IdTipoMedidas, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, 
+            $precioCosto, $Tamano, $cantMinima, $cantMaxima, $idUsuarioCarga
         ]);
 
         // Obtener el mensaje del resultado
