@@ -10,8 +10,24 @@ use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
     public function SPL_Producto(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+        'TipoLista' => 'required|integer',
+    ]);
+
+    // Si la validación falla, devolver la respuesta correspondiente
+    if ($validator->fails()) {
+        return response()->json([
+            'Message' => 'Error en la validación de los datos',
+            'Errors' => $validator->errors(),
+            'Status' => 400,
+        ], 400);
+    }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $tipoLista = $request->input('TipoLista');
         // Ejecutar el procedimiento almacenado SPL_Producto
-        $resultados = DB::select('CALL SPL_Producto()');
+        $resultados = DB::select('CALL SPL_Producto(?)', [$tipoLista]);
 
         // Devolver los resultados obtenidos
         return response()->json([
