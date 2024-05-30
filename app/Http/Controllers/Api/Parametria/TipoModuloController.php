@@ -39,7 +39,7 @@ class TipoModuloController extends Controller
         return response()->json([
             'Message' => 'OK',
             'Status' => 200,
-            'TIpoModulos' => $resultados,
+            'TipoModulos' => $resultados,
         ], 200);
     }
 }

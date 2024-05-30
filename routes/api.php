@@ -69,6 +69,10 @@ use App\Http\Controllers\Api\Recursos\ProveedorController;
 
 use App\Http\Controllers\Api\Listas\ListaPersonasController;
 
+use App\Http\Controllers\Api\Listas\ListaLocalidadesController;
+
+use App\Http\Controllers\Api\Listas\ListaProvinciasController;
+
 //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
 //LOGIN Y TOKENS
@@ -299,8 +303,13 @@ Route::put('/SPH_Producto',[StockController::class, 'SPH_Producto']);
 //-------------------------SUBMODULO DE Personal-------------------------
 
 //lista persona extra
-//listar Personal
 Route::get('/SP_ListaPersonas',[ListaPersonasController::class, 'SP_ListaPersonas']);
+
+//lista localidades extra
+Route::get('/SPL_Localidad',[ListaLocalidadesController::class, 'SPL_Localidad']);
+
+//lista provincias extra
+Route::get('/SPL_Provincia',[ListaProvinciasController::class, 'SPL_Provincia']);
 
 //listar Personal
 Route::get('/SPL_Personal',[PersonalController::class, 'SPL_Personal']);
