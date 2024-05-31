@@ -19,7 +19,7 @@ class ListaLocalidadesController extends Controller
     return response()->json([
         'Message' => 'OK',
         'Status' => 200,
-        'Personas' => $resultados,
+        'Localidades' => $resultados,
     ], 200);
 }
 }

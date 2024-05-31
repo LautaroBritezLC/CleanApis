@@ -18,7 +18,7 @@ class ListaProvinciasController extends Controller
     return response()->json([
         'Message' => 'OK',
         'Status' => 200,
-        'Personas' => $resultados,
+        'Provincias' => $resultados,
     ], 200);
 }
 }
