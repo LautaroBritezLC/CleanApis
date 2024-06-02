@@ -33,14 +33,6 @@ class rolModuloController extends Controller
         // Ejecutar el procedimiento almacenado SPL_RolModulo
         $resultado = DB::select('CALL SPL_RolModulo(?, ?)', [$idTipoRol, $tipoLista]);
 
-        // Verificar si el resultado está vacío
-        if (empty($resultado)) {
-            return response()->json([
-                'Message' => 'El idTipoRol proporcionado no existe o no tiene relacionado ningun modulo',
-                'Status' => 400,
-            ], 400);
-        }
-
         // Devolver los resultados como respuesta
         return response()->json([
             'Message' => 'OK',
@@ -153,16 +145,16 @@ class rolModuloController extends Controller
     }
 
 
-    
+
 
     public function SPH_RolModulo(Request $request) {
-    
+
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdRolModulo' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
-    
+
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
@@ -171,7 +163,7 @@ class rolModuloController extends Controller
                 'Status' => 400,
             ], 400);
         }
-    
+
         // Obtener los datos del cuerpo de la solicitud
         $idRolModulo = $request->input('IdRolModulo');
         $token = $request->input('Token');
