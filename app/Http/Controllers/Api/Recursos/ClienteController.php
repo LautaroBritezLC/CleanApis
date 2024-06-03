@@ -131,7 +131,6 @@ class ClienteController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdCliente' => 'required|integer',
-            'IdTipoPersonaSistema' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -164,7 +163,6 @@ class ClienteController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $idCliente = $request->input('IdCliente');
-        $idTipoPersonaSistema = $request->input('IdTipoPersonaSistema');
         $idTipoPersona = $request->input('IdTipoPersona');
         $idTipoDomicilio = $request->input('IdTipoDomicilio');
         $calle = $request->input('Calle');
@@ -184,9 +182,8 @@ class ClienteController extends Controller
         // echo "IdCliente: $idCliente, IdTipoPersonaSistema: $idTipoPersonaSistema, IdTipoPersona: $idTipoPersona, IdTipoDomicilio: $idTipoDomicilio, Calle: $calle, Nro: $nro, Piso: $piso, IdLocalidad: $idLocalidad, IdTipoDocumentacion: $idTipoDocumentacion, Documentacion: $documentacion, Nombre: $nombre, Apellido: $apellido, Mail: $mail, RazonSocial: $razonSocial, FechaNacimiento: $fechaNacimiento, Telefono: $telefono, IdProvincia: $idProvincia";
 
         // Ejecutar el procedimiento almacenado SPM_Cliente
-        $resultados = DB::select('CALL SPM_Cliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $resultados = DB::select('CALL SPM_Cliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $idCliente,
-            $idTipoPersonaSistema,
             $idTipoPersona,
             $idTipoDomicilio,
             $calle,

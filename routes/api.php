@@ -104,10 +104,19 @@ Route::get('/SPL_Usuarios',[UsuariosController::class, 'SPL_Usuarios']);
 Route::post('/SPA_Usuarios',[UsuariosController::class, 'SPA_Usuarios']);
 
 //editar Usuarios
-Route::put('/SPM_Usuarios',[UsuariosController::class, 'SPM_Usuarios']); //actualizar en el server
+Route::put('/SPM_Usuarios',[UsuariosController::class, 'SPM_Usuarios']);
 
 //borrar Usuarios
-Route::put('/SPB_Usuarios',[UsuariosController::class, 'SPB_Usuarios']); //actualizar en el server
+Route::put('/SPB_Usuarios',[UsuariosController::class, 'SPB_Usuarios']); 
+
+//agregar rol usuario
+Route::post('/SPA_AgregarRolUsuario',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
+
+//listar usuarios por rol
+Route::get('/SP_ListaUsuariosRol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
+
+//listar borrar usuario rol
+Route::get('/SPB_UsuarioRol',[UsuariosController::class, 'SPB_UsuarioRol']);
 
 
 //-------------------------SUBMODULO DE TipoRol-------------------------

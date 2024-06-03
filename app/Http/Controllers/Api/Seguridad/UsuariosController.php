@@ -234,5 +234,135 @@ class UsuariosController extends Controller
 
     }
 
+    public function SPA_AgregarRolUsuario(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdUsuario' => 'required|integer',
+            'IdRol' => 'required|integer',
+            'Token' => 'required|string',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $IdUsuario = $request->input('IdUsuario');
+        $IdRol = $request->input('IdRol');
+        $Token = $request->input('Token');
+
+        // echo $IdUsuario . ' ' . $IdRol . ' '.  $Token;
+
+        // Ejecutar el procedimiento almacenado SPA_AgregarRolUsuario
+        $resultados = DB::select('CALL SPA_AgregarRolUsuario(?, ?, ?)', [
+            $IdUsuario, $IdRol, $Token
+        ]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+    }
+
+    public function SP_ListaUsuariosRol(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdUsuario' => 'required|integer',
+        ]);
+    
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+    
+        // Obtener los datos del cuerpo de la solicitud
+        $IdUsuario = $request->input('IdUsuario');
+        // Ejecutar el procedimiento almacenado SPL_Usuarios
+        $resultados = DB::select('CALL SP_ListaUsuariosRol(?)', [$IdUsuario]);
+        
+        // Obtener el mensaje del resultado
+        $mensaje = isset($resultados[0]->Message) ? $resultados[0]->Message : null;
+    
+        // Verificar si el mensaje es nulo (para el caso de que el tipo de lista sea válido)
+        if ($mensaje === null) {
+            // Devolver los resultados como respuesta
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+                'UsuariosPorRol' => $resultados,
+            ], 200);
+        } else {
+            // Devolver el mensaje de error
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+
+    }
+
+    public function SPB_UsuarioRol(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdUsuarioRol' => 'required|integer',
+            'Token' => 'required|string|max:500',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener el IdCliente del cuerpo de la solicitud
+        $IdUsuarioRol = $request->input('IdUsuarioRol');
+        $token = $request->input('Token');
+
+        // echo $IdUsuarioRol. $token;
+        // Ejecutar el procedimiento almacenado SPB_Cliente
+        $resultados = DB::select('CALL SPB_UsuarioRol(?,?)', [$IdUsuarioRol, $token]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+    }
+
+
+
 
 }
