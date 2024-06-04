@@ -362,7 +362,47 @@ class UsuariosController extends Controller
         }
     }
 
+    public function SPM_UsuarioPorSucursal(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdUsuario' => 'required|integer',
+            'IdSucursal' => 'required|integer',
+            'Token' => 'required|string|max:500',
+        ]);
 
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener el IdCliente del cuerpo de la solicitud
+        $IdUsuario = $request->input('IdUsuario');
+        $IdSucursal = $request->input('IdSucursal');
+        $token = $request->input('Token');
+
+        // Ejecutar el procedimiento almacenado SPB_Cliente
+        $resultados = DB::select('CALL SPM_UsuarioPorSucursal(?,?,?)', [$IdUsuario, $IdSucursal ,  $token]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+    }
 
 
 }

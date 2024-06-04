@@ -115,8 +115,11 @@ Route::post('/SPA_AgregarRolUsuario',[UsuariosController::class, 'SPA_AgregarRol
 //listar usuarios por rol
 Route::get('/SP_ListaUsuariosRol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
 
-//listar borrar usuario rol
-Route::get('/SPB_UsuarioRol',[UsuariosController::class, 'SPB_UsuarioRol']);
+// borrar usuario rol
+Route::put('/SPB_UsuarioRol',[UsuariosController::class, 'SPB_UsuarioRol']);
+
+//editar usuario por sucursal
+Route::put('/SPM_UsuarioPorSucursal',[UsuariosController::class, 'SPM_UsuarioPorSucursal']);
 
 
 //-------------------------SUBMODULO DE TipoRol-------------------------
