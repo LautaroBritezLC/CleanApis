@@ -42,7 +42,6 @@ class PersonalController extends Controller
     public function SPA_Personal(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdTipoPersonaSistema' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -61,6 +60,7 @@ class PersonalController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -73,7 +73,6 @@ class PersonalController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdTipoPersonaSistema = $request->input('IdTipoPersonaSistema');
         $IdTipoPersona = $request->input('IdTipoPersona');
         $idTipoDomicilio = $request->input('IdTipoDomicilio');
         $calle = $request->input('Calle');
@@ -88,6 +87,7 @@ class PersonalController extends Controller
         $fechaNacimiento = $request->input('FechaNacimiento');
         $telefono = $request->input('Telefono');
         $idProvincia = $request->input('IdProvincia');
+        $Token = $request->input('Token');
 
 
         // echo 'IdTipoPersonaSistema: ' . $IdTipoPersonaSistema . ', IdTipoPersona: ' . $IdTipoPersona . ', idTipoDomicilio: ' . $idTipoDomicilio . ', calle: ' . $calle . ', nro: ' . $nro . ', piso: ' . $piso . ', idLocalidad: ' . $idLocalidad . ', idTipoDocumentacion: ' . $idTipoDocumentacion . '<br>';
@@ -95,8 +95,7 @@ class PersonalController extends Controller
         
 
         // Ejecutar el procedimiento almacenado SPA_Personal
-        $resultados = DB::select('CALL SPA_Personal(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-            $IdTipoPersonaSistema,
+        $resultados = DB::select('CALL SPA_Personal( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $IdTipoPersona,
             $idTipoDomicilio,
             $calle,
@@ -110,7 +109,8 @@ class PersonalController extends Controller
             $mail,
             $fechaNacimiento,
             $telefono,
-            $idProvincia
+            $idProvincia,
+            $Token
         ]);
 
         // Obtener el mensaje del resultado
@@ -136,7 +136,6 @@ class PersonalController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdPersonal' => 'required|integer',
-            'IdTipoPersonaSistema' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -155,6 +154,7 @@ class PersonalController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -168,7 +168,6 @@ class PersonalController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $idPersonal = $request->input('IdPersonal');
-        $IdTipoPersonaSistema = $request->input('IdTipoPersonaSistema');
         $IdTipoPersona = $request->input('IdTipoPersona');
         $idTipoDomicilio = $request->input('IdTipoDomicilio');
         $calle = $request->input('Calle');
@@ -183,6 +182,7 @@ class PersonalController extends Controller
         $fechaNacimiento = $request->input('FechaNacimiento');
         $telefono = $request->input('Telefono');
         $idProvincia = $request->input('IdProvincia');
+        $Token = $request->input('Token');
 
 
         // echo  'IdPersonal:' . $idPersonal .'IdTipoPersonaSistema: ' . $IdTipoPersonaSistema . ', IdTipoPersona: ' . $IdTipoPersona . ', idTipoDomicilio: ' . $idTipoDomicilio . ', calle: ' . $calle . ', nro: ' . $nro . ', piso: ' . $piso . ', idLocalidad: ' . $idLocalidad . ', idTipoDocumentacion: ' . $idTipoDocumentacion . '<br>';
@@ -191,7 +191,6 @@ class PersonalController extends Controller
         // Ejecutar el procedimiento almacenado SPM_Personal
         $resultados = DB::select('CALL SPM_Personal(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $idPersonal,
-            $IdTipoPersonaSistema,
             $IdTipoPersona,
             $idTipoDomicilio,
             $calle,
@@ -205,7 +204,8 @@ class PersonalController extends Controller
             $mail,
             $fechaNacimiento,
             $telefono,
-            $idProvincia
+            $idProvincia,
+            $Token
         ]);
 
         // Obtener el mensaje del resultado
