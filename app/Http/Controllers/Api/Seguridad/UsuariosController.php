@@ -150,6 +150,7 @@ class UsuariosController extends Controller
                     }
                 },
             ],
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -165,11 +166,12 @@ class UsuariosController extends Controller
         $IdUsuario = $request->input('IdUsuario');
         $NuevoUsuario = $request->input('NuevoUsuario');
         $NuevaClave = $request->input('NuevaClave');
+        $Token = $request->input('Token');
 
 
         // Ejecutar el procedimiento almacenado SPM_Usuario
-        $resultados = DB::select('CALL SPM_Usuario(?, ?, ?)', [
-            $IdUsuario, $NuevoUsuario, $NuevaClave
+        $resultados = DB::select('CALL SPM_Usuario(?, ?, ?, ?)', [
+            $IdUsuario, $NuevoUsuario, $NuevaClave, $Token
         ]);
 
         // Obtener el mensaje del resultado
