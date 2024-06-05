@@ -133,7 +133,7 @@ class UsuariosController extends Controller
                 'min:8',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/[0-9]/', $value)) {
-                        $fail('El nuevo nombre de usuario debe contener al menos un número.');
+                        $fail('El nuevo nombre de usuario debe contener al menos un numero.');
                     }
                 },
             ],
@@ -143,13 +143,14 @@ class UsuariosController extends Controller
                 'min:8',
                 function ($attribute, $value, $fail) {
                     if (!empty($value) && !preg_match('/[[:upper:]]/', $value)) {
-                        $fail('La nueva contraseña debe contener al menos una letra mayúscula.');
+                        $fail('La nueva contraseña debe contener al menos una letra mayuscula.');
                     }
                     if (!empty($value) && !preg_match('/[0-9]/', $value)) {
-                        $fail('La nueva contraseña debe contener al menos un número.');
+                        $fail('La nueva contraseña debe contener al menos un numero.');
                     }
                 },
             ],
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -165,11 +166,12 @@ class UsuariosController extends Controller
         $IdUsuario = $request->input('IdUsuario');
         $NuevoUsuario = $request->input('NuevoUsuario');
         $NuevaClave = $request->input('NuevaClave');
+        $Token = $request->input('Token');
 
 
         // Ejecutar el procedimiento almacenado SPM_Usuario
-        $resultados = DB::select('CALL SPM_Usuario(?, ?, ?)', [
-            $IdUsuario, $NuevoUsuario, $NuevaClave
+        $resultados = DB::select('CALL SPM_Usuario(?, ?, ?, ?)', [
+            $IdUsuario, $NuevoUsuario, $NuevaClave, $Token
         ]);
 
         // Obtener el mensaje del resultado

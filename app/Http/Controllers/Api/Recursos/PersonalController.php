@@ -128,14 +128,12 @@ class PersonalController extends Controller
                 'Status' => 400,
             ], 400);
         }
-
-
     }
 
     public function SPM_Personal(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdPersonal' => 'required|integer',
+            'IdPersona' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -167,7 +165,7 @@ class PersonalController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $idPersonal = $request->input('IdPersonal');
+        $IdPersona = $request->input('IdPersona');
         $IdTipoPersona = $request->input('IdTipoPersona');
         $idTipoDomicilio = $request->input('IdTipoDomicilio');
         $calle = $request->input('Calle');
@@ -190,7 +188,7 @@ class PersonalController extends Controller
         
         // Ejecutar el procedimiento almacenado SPM_Personal
         $resultados = DB::select('CALL SPM_Personal(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-            $idPersonal,
+            $IdPersona,
             $IdTipoPersona,
             $idTipoDomicilio,
             $calle,
@@ -223,15 +221,12 @@ class PersonalController extends Controller
                 'Status' => 400,
             ], 400);
         }
-
-
-
     }
 
     public function SPB_Personal(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdPersonal' => 'required|integer',
+            'IdPersona' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -245,13 +240,13 @@ class PersonalController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdPersonal = $request->input('IdPersonal');
+        $IdPersona = $request->input('IdPersona');
         $token = $request->input('Token');
 
 
         // Ejecutar el procedimiento almacenado SPB_Personal
         $resultados = DB::select('CALL SPB_Personal(?, ?)', [
-            $IdPersonal, 
+            $IdPersona, 
             $token
         ]);
 
@@ -276,7 +271,7 @@ class PersonalController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'Token' => 'required|string|max:500',
-            'IdPersonal' => 'required|integer',
+            'IdPersona' => 'required|integer',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -289,12 +284,12 @@ class PersonalController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdPersonal = $request->input('IdPersonal');
+        $IdPersona = $request->input('IdPersona');
         $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPH_Personal
         $resultados = DB::select('CALL SPH_Personal(?, ?)', [
-            $IdPersonal,
+            $IdPersona,
             $token
         ]);
 

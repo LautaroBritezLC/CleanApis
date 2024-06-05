@@ -53,7 +53,6 @@ class ProveedorController extends Controller
     public function SPA_Proveedor(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdTipoPersonaSistema' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -73,6 +72,7 @@ class ProveedorController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -85,7 +85,6 @@ class ProveedorController extends Controller
         }
 
         // Obtener los datos del cuerpo de la solicitud
-        $IdTipoPersonaSistema = $request->input('IdTipoPersonaSistema');
         $IdTipoPersona = $request->input('IdTipoPersona');
         $IdTipoDomicilio = $request->input('IdTipoDomicilio');
         $Calle = $request->input('Calle');
@@ -101,13 +100,14 @@ class ProveedorController extends Controller
         $FechaNacimiento = $request->input('FechaNacimiento');
         $Telefono = $request->input('Telefono');
         $IdProvincia = $request->input('IdProvincia');
+        $Token = $request->input('Token');
+
 
         // Echo de los datos obtenidos
         // echo 'IdTipoPersonaSistema: ' . $IdTipoPersonaSistema . ', IdTipoPersona: ' . $IdTipoPersona . ', IdTipoDomicilio: ' . $IdTipoDomicilio . ', Calle: ' . $Calle . ', Nro: ' . $Nro . ', Piso: ' . $Piso . ', IdLocalidad: ' . $IdLocalidad . ', IdTipoDocumentacion: ' . $IdTipoDocumentacion . ', Documentacion: ' . $Documentacion . ', Nombre: ' . $Nombre . ', Apellido: ' . $Apellido . ', Mail: ' . $Mail . ', RazonSocial: ' . $RazonSocial . ', FechaNacimiento: ' . $FechaNacimiento . ', Telefono: ' . $Telefono . ', IdProvincia: ' . $IdProvincia . '<br>';
 
         // Ejecutar el procedimiento almacenado SPA_Proveedor
         $resultados = DB::select('CALL SPA_Proveedor(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-            $IdTipoPersonaSistema,
             $IdTipoPersona,
             $IdTipoDomicilio,
             $Calle,
@@ -122,7 +122,8 @@ class ProveedorController extends Controller
             $RazonSocial,
             $FechaNacimiento,
             $Telefono,
-            $IdProvincia
+            $IdProvincia,
+            $Token
         ]);
 
         // Obtener el mensaje del resultado
@@ -147,7 +148,6 @@ class ProveedorController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdPersona' => 'required|integer',
-            'IdTipoPersonaSistema' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -167,8 +167,9 @@ class ProveedorController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string',
         ]);
-
+    
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
@@ -177,10 +178,9 @@ class ProveedorController extends Controller
                 'Status' => 400,
             ], 400);
         }
-
+    
         // Obtener los datos del cuerpo de la solicitud
         $idPersona = $request->input('IdPersona');
-        $idTipoPersonaSistema = $request->input('IdTipoPersonaSistema');
         $idTipoPersona = $request->input('IdTipoPersona');
         $idTipoDomicilio = $request->input('IdTipoDomicilio');
         $calle = $request->input('Calle');
@@ -196,14 +196,11 @@ class ProveedorController extends Controller
         $fechaNacimiento = $request->input('FechaNacimiento');
         $telefono = $request->input('Telefono');
         $idProvincia = $request->input('IdProvincia');
-
-        // // Echo de los datos obtenidos para probar
-        // echo "IdPersona: $idPersona, IdTipoPersonaSistema: $idTipoPersonaSistema, IdTipoPersona: $idTipoPersona, IdTipoDomicilio: $idTipoDomicilio, Calle: $calle, Nro: $nro, Piso: $piso, IdLocalidad: $idLocalidad, IdTipoDocumentacion: $idTipoDocumentacion, Documentacion: $documentacion, Nombre: $nombre, Apellido: $apellido, Mail: $mail, RazonSocial: $razonSocial, FechaNacimiento: $fechaNacimiento, Telefono: $telefono, IdProvincia: $idProvincia";
-
+        $Token = $request->input('Token');
+    
         // Ejecutar el procedimiento almacenado SPM_Proveedor
         $resultados = DB::select('CALL SPM_Proveedor(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $idPersona,
-            $idTipoPersonaSistema,
             $idTipoPersona,
             $idTipoDomicilio,
             $calle,
@@ -218,12 +215,13 @@ class ProveedorController extends Controller
             $razonSocial,
             $fechaNacimiento,
             $telefono,
-            $idProvincia
+            $idProvincia,
+            $Token
         ]);
-
+    
         // Obtener el mensaje del resultado
         $mensaje = isset($resultados[0]->v_Message) ? $resultados[0]->v_Message : null;
-
+    
         // Verificar si el mensaje es 'OK'
         if ($mensaje === 'OK') {
             // Devolver los resultados como respuesta
@@ -238,7 +236,6 @@ class ProveedorController extends Controller
                 'Status' => 400,
             ], 400);
         }
-
     }
 
 
@@ -247,7 +244,7 @@ class ProveedorController extends Controller
     public function SPB_Proveedor(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
-            'IdProveedor' => 'required|integer',
+            'IdPersona' => 'required|integer',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -261,13 +258,13 @@ class ProveedorController extends Controller
         }
 
         // Obtener el IdCliente del cuerpo de la solicitud
-        $IdProveedor = $request->input('IdProveedor');
+        $IdPersona = $request->input('IdPersona');
         $token = $request->input('Token');
 
         // echo $IdProveedor .  $token ;
 
         // Ejecutar el procedimiento almacenado SPB_Cliente
-        $resultados = DB::select('CALL SPB_Proveedor(?,?)', [$IdProveedor, $token]);
+        $resultados = DB::select('CALL SPB_Proveedor(?,?)', [$IdPersona, $token]);
 
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->v_Message;
@@ -286,7 +283,45 @@ class ProveedorController extends Controller
         }
     }
     public function SPH_Proveedor(Request $request) {
-        echo 'SPH_Proveedor';
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdPersona' => 'required|integer',
+            'Token' => 'required|string|max:500',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener el IdCliente del cuerpo de la solicitud
+        $IdPersona = $request->input('IdPersona');
+        $token = $request->input('Token');
+
+        // echo $IdProveedor .  $token ;
+
+        // Ejecutar el procedimiento almacenado SPB_Cliente
+        $resultados = DB::select('CALL SPH_Proveedor(?,?)', [$IdPersona, $token]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
     }
 
 
