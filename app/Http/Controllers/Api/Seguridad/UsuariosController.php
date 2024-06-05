@@ -133,7 +133,7 @@ class UsuariosController extends Controller
                 'min:8',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/[0-9]/', $value)) {
-                        $fail('El nuevo nombre de usuario debe contener al menos un número.');
+                        $fail('El nuevo nombre de usuario debe contener al menos un numero.');
                     }
                 },
             ],
@@ -143,10 +143,10 @@ class UsuariosController extends Controller
                 'min:8',
                 function ($attribute, $value, $fail) {
                     if (!empty($value) && !preg_match('/[[:upper:]]/', $value)) {
-                        $fail('La nueva contraseña debe contener al menos una letra mayúscula.');
+                        $fail('La nueva contraseña debe contener al menos una letra mayuscula.');
                     }
                     if (!empty($value) && !preg_match('/[0-9]/', $value)) {
-                        $fail('La nueva contraseña debe contener al menos un número.');
+                        $fail('La nueva contraseña debe contener al menos un numero.');
                     }
                 },
             ],
