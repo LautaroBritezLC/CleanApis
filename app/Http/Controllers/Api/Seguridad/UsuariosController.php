@@ -15,7 +15,7 @@ class UsuariosController extends Controller
         $validator = Validator::make($request->all(), [
             'TipoLista' => 'required|integer',
         ]);
-    
+
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
@@ -24,16 +24,16 @@ class UsuariosController extends Controller
                 'Status' => 400,
             ], 400);
         }
-    
+
         // Obtener los datos del cuerpo de la solicitud
         $tipoLista = $request->input('TipoLista');
-    
+
         // Ejecutar el procedimiento almacenado SPL_Usuarios
         $resultados = DB::select('CALL SPL_Usuarios(?)', [$tipoLista]);
-        
+
         // Obtener el mensaje del resultado
         $mensaje = isset($resultados[0]->Message) ? $resultados[0]->Message : null;
-    
+
         // Verificar si el mensaje es nulo (para el caso de que el tipo de lista sea válido)
         if ($mensaje === null) {
             // Devolver los resultados como respuesta
@@ -50,7 +50,7 @@ class UsuariosController extends Controller
             ], 400);
         }
     }
-    
+
 
     public function SPA_Usuarios(Request $request) {
         // Validar los datos de entrada
@@ -196,6 +196,7 @@ class UsuariosController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdUsuario' => 'required|integer',
+            'Token' => 'required|string'
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -209,14 +210,10 @@ class UsuariosController extends Controller
 
         // Obtener el id_usuario del cuerpo de la solicitud
         $id_usuario = $request->input('IdUsuario');
-
-        // echo $id_usuario;
-
-        // Ejecutar el procedimiento almacenado SPB_Usuarios
-        DB::statement('CALL SPB_Usuarios(?)', [$id_usuario]);
+        $Token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPB_Usuarios
-        $resultados = DB::select('CALL SPB_Usuarios(?)', [$id_usuario]);
+        DB::statement('CALL SPB_Usuarios(?, ?)', [$id_usuario, $Token]);
 
         // Verificar si la fila fue actualizada
         $usuario = DB::table('Usuario')->where('IdUsuario', $id_usuario)->first();
@@ -287,7 +284,7 @@ class UsuariosController extends Controller
         $validator = Validator::make($request->all(), [
             'IdUsuario' => 'required|integer',
         ]);
-    
+
         // Si la validación falla, devolver la respuesta correspondiente
         if ($validator->fails()) {
             return response()->json([
@@ -296,15 +293,15 @@ class UsuariosController extends Controller
                 'Status' => 400,
             ], 400);
         }
-    
+
         // Obtener los datos del cuerpo de la solicitud
         $IdUsuario = $request->input('IdUsuario');
         // Ejecutar el procedimiento almacenado SPL_Usuarios
         $resultados = DB::select('CALL SP_ListaUsuariosRol(?)', [$IdUsuario]);
-        
+
         // Obtener el mensaje del resultado
         $mensaje = isset($resultados[0]->Message) ? $resultados[0]->Message : null;
-    
+
         // Verificar si el mensaje es nulo (para el caso de que el tipo de lista sea válido)
         if ($mensaje === null) {
             // Devolver los resultados como respuesta
