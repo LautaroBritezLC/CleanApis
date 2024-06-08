@@ -93,61 +93,61 @@ Route::get('utils/submenu/image',[menuController::class, 'SP_GetImagenSubMenu'])
 
 //-------------------------SUBMODULO DE Usuarios-------------------------
 //listar Usuarios
-Route::get('seguridad/usuario',[UsuariosController::class, 'SPL_Usuarios']);
+Route::get('seguridad/usuarios',[UsuariosController::class, 'SPL_Usuarios']);
 
 //agregar Usuarios
-Route::post('seguridad/usuario',[UsuariosController::class, 'SPA_Usuarios']);
+Route::post('seguridad/usuarios',[UsuariosController::class, 'SPA_Usuarios']);
 
 //editar Usuarios
-Route::put('seguridad/usuario',[UsuariosController::class, 'SPM_Usuarios']);
+Route::put('seguridad/usuarios',[UsuariosController::class, 'SPM_Usuarios']);
 
 //borrar Usuarios
-Route::put('seguridad/usuario',[UsuariosController::class, 'SPB_Usuarios']); 
+Route::delete('seguridad/usuarios',[UsuariosController::class, 'SPB_Usuarios']); 
 
 //agregar rol usuario
-Route::post('seguridad/usuario/rol',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
+Route::post('seguridad/usuarios/rol',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
 
 //listar usuarios por rol
-Route::get('seguridad/usuario/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
+Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
 
 // borrar usuario rol
-Route::put('seguridad/usuario/rol',[UsuariosController::class, 'SPB_UsuarioRol']);
+Route::delete('seguridad/usuarios/rol',[UsuariosController::class, 'SPB_UsuarioRol']);
 
 //editar usuario por sucursal
-Route::put('seguridad/usuario/sucursal',[UsuariosController::class, 'SPM_UsuarioPorSucursal']);
+Route::put('seguridad/usuarios/sucursal',[UsuariosController::class, 'SPM_UsuarioPorSucursal']);
 
 
 //-------------------------SUBMODULO DE TipoRol-------------------------
 
 //agregar tipo rol
-Route::post('seguridad/tiporol',[tiporolController::class, 'SPA_TipoRol']);
+Route::post('seguridad/tiporoles',[tiporolController::class, 'SPA_TipoRol']);
 
 //modificar tipo rol
-Route::put('seguridad/tiporol',[tiporolController::class, 'SPM_TipoRol']);
+Route::put('seguridad/tiporoles',[tiporolController::class, 'SPM_TipoRol']);
 
 //borrar tipo rol
-Route::put('seguridad/tiporol',[tiporolController::class, 'SPB_TipoRol']);
+Route::delete('seguridad/tiporoles',[tiporolController::class, 'SPB_TipoRol']);
 
 //listar tipo rol
-Route::get('seguridad/tiporol',[tiporolController::class, 'SPL_TipoRol']);
+Route::get('seguridad/tiporoles',[tiporolController::class, 'SPL_TipoRol']);
 
 //habilitar tipo rol
-Route::put('seguridad/tiporol',[tiporolController::class, 'SPH_TipoRol']);
+Route::put('seguridad/tiporoles',[tiporolController::class, 'SPH_TipoRol']);
 
 
 //-------------------------SUBMODULO DE RolModulo-------------------------
 
 //listar rol modulo
-Route::get('seguridad/rolmodulo',[rolModuloController::class, 'SPL_RolModulo']);
+Route::get('seguridad/rolmodulos',[rolModuloController::class, 'SPL_RolModulo']);
 
 //agregar rol modulo
-Route::post('seguridad/rolmodulo',[rolModuloController::class, 'SPA_RolModulo']);
+Route::post('seguridad/rolmodulos',[rolModuloController::class, 'SPA_RolModulo']);
 
 //borrar rol modulo
-Route::put('seguridad/rolmodulo',[rolModuloController::class, 'SPB_RolModulo']);
+Route::delete('seguridad/rolmodulos',[rolModuloController::class, 'SPB_RolModulo']);
 
 //habilitar rol modulo
-Route::put('seguridad/rolmodulo',[rolModuloController::class, 'SPH_RolModulo']);
+Route::put('seguridad/rolmodulos',[rolModuloController::class, 'SPH_RolModulo']);
 
 
 //-------------------------SUBMODULO DE SistemaAPIs-------------------------
@@ -205,7 +205,7 @@ Route::post('parametria/tipoproducto',[TipoProductoController::class, 'SPA_TipoP
 Route::put('parametria/tipoproducto',[TipoProductoController::class, 'SPM_TipoProducto']);
 
 //borrar Tipo Producto
-Route::put('parametria/tipoproducto',[TipoProductoController::class, 'SPB_TipoProducto']);
+Route::delete('parametria/tipoproducto',[TipoProductoController::class, 'SPB_TipoProducto']);
 
 //-------------------------SUBMODULO DE TipoCategoria-------------------------
 //listar Tipo Categoria
@@ -218,7 +218,7 @@ Route::post('parametria/tipocategoria',[TipoCategoriaController::class, 'SPA_Tip
 Route::put('parametria/tipocategoria',[TipoCategoriaController::class, 'SPM_TipoCategoria']);
 
 //borrar Tipo Categoria
-Route::put('parametria/tipocategoria',[TipoCategoriaController::class, 'SPB_TipoCategoria']);
+Route::delete('parametria/tipocategoria',[TipoCategoriaController::class, 'SPB_TipoCategoria']);
 
 
 //-------------------------SUBMODULO DE TipoImpuesto-------------------------
@@ -232,7 +232,7 @@ Route::post('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPA_TipoI
 Route::put('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPM_TipoImpuesto']);
 
 //borrar Tipo Impuesto
-Route::put('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPB_TipoImpuesto']);
+Route::delete('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPB_TipoImpuesto']);
 
 //-------------------------SUBMODULO DE FormaDePago-------------------------
 //listar Tipo FormaDePago
@@ -245,20 +245,20 @@ Route::post('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPA
 Route::put('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPM_TipoFormaDePago']);
 
 //borrar Tipo FormaDePago
-Route::put('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPB_TipoFormaDePago']);
+Route::delete('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPB_TipoFormaDePago']);
 
 //-------------------------SUBMODULO DE Sucursal-------------------------
 //listar Tipo Sucursal
-Route::get('parametria/sucursal',[SucursalController::class, 'SPL_Sucursal']);
+Route::get('parametria/sucursales',[SucursalController::class, 'SPL_Sucursal']);
 
 //agregar Tipo Sucursal
-Route::post('parametria/sucursal',[SucursalController::class, 'SPA_Sucursal']);
+Route::post('parametria/sucursales',[SucursalController::class, 'SPA_Sucursal']);
 
 //editar Tipo Sucursal
-Route::put('parametria/sucursal',[SucursalController::class, 'SPM_Sucursal']);
+Route::put('parametria/sucursales',[SucursalController::class, 'SPM_Sucursal']);
 
 //borrar Tipo Sucursal
-Route::put('parametria/sucursal',[SucursalController::class, 'SPB_Sucursal']);
+Route::delete('parametria/sucursales',[SucursalController::class, 'SPB_Sucursal']);
 
 //-------------------------SUBMODULO DE TipoModulo-------------------------
 //listar TipoModulo
@@ -277,7 +277,7 @@ Route::post('gestion/inventario',[StockController::class, 'SPA_Producto']);
 Route::put('gestion/inventario',[StockController::class, 'SPM_Producto']);
 
 //borrar Producto
-Route::put('gestion/inventario',[StockController::class, 'SPB_Producto']);
+Route::delete('gestion/inventario',[StockController::class, 'SPB_Producto']);
 
 //habilitar Producto
 Route::put('gestion/inventario',[StockController::class, 'SPH_Producto']);
@@ -304,7 +304,7 @@ Route::post('recursos/personal',[PersonalController::class, 'SPA_Personal']);
 Route::put('recursos/personal',[PersonalController::class, 'SPM_Personal']);
 
 //borrar Personal
-Route::put('recursos/personal',[PersonalController::class, 'SPB_Personal']);
+Route::delete('recursos/personal',[PersonalController::class, 'SPB_Personal']);
 
 //habilitar Personal
 Route::put('recursos/personal',[PersonalController::class, 'SPH_Personal']);
@@ -312,35 +312,35 @@ Route::put('recursos/personal',[PersonalController::class, 'SPH_Personal']);
 
 //-------------------------SUBMODULO DE Cliente-------------------------
 //listar Cliente
-Route::get('recursos/cliente',[ClienteController::class, 'SPL_Cliente']);
+Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
 
 //agregar Cliente
-Route::post('recursos/cliente',[ClienteController::class, 'SPA_Clientes']);
+Route::post('recursos/clientes',[ClienteController::class, 'SPA_Clientes']);
 
 //editar Cliente
-Route::put('recursos/cliente',[ClienteController::class, 'SPM_Cliente']);
+Route::put('recursos/clientes',[ClienteController::class, 'SPM_Cliente']);
 
 //borrar Cliente
-Route::put('recursos/cliente',[ClienteController::class, 'SPB_Cliente']);
+Route::delete('recursos/clientes',[ClienteController::class, 'SPB_Cliente']);
 
 //habilitar Cliente
-Route::put('recursos/cliente',[ClienteController::class, 'SPH_Cliente']);
+Route::put('recursos/clientes',[ClienteController::class, 'SPH_Cliente']);
 
 
 //-------------------------SUBMODULO DE Cliente-------------------------
 //listar Proveedor
-Route::get('recursos/proveedor',[ProveedorController::class, 'SPL_Proveedor']);
+Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
 
 //agregar Proveedor
-Route::post('recursos/proveedor',[ProveedorController::class, 'SPA_Proveedor']);
+Route::post('recursos/proveedores',[ProveedorController::class, 'SPA_Proveedor']);
 
 //editar Proveedor
-Route::put('recursos/proveedor',[ProveedorController::class, 'SPM_Proveedor']);
+Route::put('recursos/proveedores',[ProveedorController::class, 'SPM_Proveedor']);
 
 //borrar Proveedor
-Route::put('recursos/proveedor',[ProveedorController::class, 'SPB_Proveedor']);
+Route::delete('recursos/proveedores',[ProveedorController::class, 'SPB_Proveedor']);
 
 //habilitar Proveedor
-Route::put('recursos/proveedor',[ProveedorController::class, 'SPH_Proveedor']);
+Route::put('recursos/proveedores',[ProveedorController::class, 'SPH_Proveedor']);
 
 //hasta aca anda todo falta agregar el modulo de recursos
