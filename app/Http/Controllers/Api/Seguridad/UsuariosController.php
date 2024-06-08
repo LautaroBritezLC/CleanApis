@@ -168,7 +168,6 @@ class UsuariosController extends Controller
         $NuevaClave = $request->input('NuevaClave');
         $Token = $request->input('Token');
 
-
         // Ejecutar el procedimiento almacenado SPM_Usuario
         $resultados = DB::select('CALL SPM_Usuario(?, ?, ?, ?)', [
             $IdUsuario, $NuevoUsuario, $NuevaClave, $Token

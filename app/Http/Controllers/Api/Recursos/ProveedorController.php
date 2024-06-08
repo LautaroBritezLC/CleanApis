@@ -132,6 +132,7 @@ class ProveedorController extends Controller
     public function SPM_Proveedor(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
+            'IdPersona' => 'required|integer',
             'IdTipoPersona' => 'required|integer',
             'IdTipoDomicilio' => 'required|integer',
             'Calle' => 'required|string|max:45',
@@ -157,6 +158,7 @@ class ProveedorController extends Controller
         }
     
         // Obtener los datos del cuerpo de la solicitud
+        $IdPersona = $request->input('IdPersona');
         $IdTipoPersona = $request->input('IdTipoPersona');
         $IdTipoDomicilio = $request->input('IdTipoDomicilio');
         $Calle = $request->input('Calle');
@@ -172,10 +174,11 @@ class ProveedorController extends Controller
         $Token = $request->input('Token');
     
         // Ejecutar el procedimiento almacenado SPA_Proveedor
-        $resultados = DB::select('CALL SPA_Proveedor(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $resultados = DB::select('CALL SPM_Proveedor(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+            $IdPersona,
             $IdTipoPersona,
             $IdTipoDomicilio,
-            $Calle,
+            $Calle, 
             $Nro,
             $Piso,
             $IdLocalidad,
