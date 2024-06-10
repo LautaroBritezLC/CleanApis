@@ -400,4 +400,10 @@ Route::get('SPG_ObtenerCantProductos',[Graficos::class, 'SPG_ObtenerCantProducto
 //obtener stock total de cada sucursal
 Route::get('SPG_ObtenerCantProductosPorSucursal',[Graficos::class, 'SPG_ObtenerCantProductosPorSucursal']);
 
+//obtener cantidad de proveedores
+Route::get('SPG_ObtenerCantProveedores',[Graficos::class, 'SPG_ObtenerCantProveedores']);
+
+//obtener cantidad de clientes
+Route::get('SPG_ObtenerCantClientes',[Graficos::class, 'SPG_ObtenerCantClientes']);
+
 //hasta aca anda todo falta agregar el modulo de recursos
