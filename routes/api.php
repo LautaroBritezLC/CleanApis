@@ -65,6 +65,7 @@ use App\Http\Controllers\Api\Recursos\ClienteController;
 
 use App\Http\Controllers\Api\Recursos\ProveedorController;
 
+
 //TODO--------------------------------------LISTAS--------------------------------------------
 
 use App\Http\Controllers\Api\Listas\ListaPersonasController;
@@ -73,92 +74,38 @@ use App\Http\Controllers\Api\Listas\ListaLocalidadesController;
 
 use App\Http\Controllers\Api\Listas\ListaProvinciasController;
 
-Route::middleware('validarbearer')->group(function () {
-
-      //TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
-
-      //LOGIN Y TOKENS
-      Route::post('/usuario',[usuarioController::class, 'spValidarUsuario']);
-
-      //obtener usuario desde el token
-      Route::get('/fnObtenerUsuDesdeBearer',[usuarioController::class, 'fnObtenerUsuDesdeBearer']);
-
-      //menues
-      Route::get('utils/menu',[menuController::class, 'SP_GetMenu']);
-      //submenues
-      Route::get('utils/menu/submenu',[menuController::class, 'SP_GetSubMenu']);
-
-      //ImagenSubMenu
-      Route::get('utils/submenu/image',[menuController::class, 'SP_GetImagenSubMenu']);
-
-      //--------------------------------------MODULO DE SEGURIDAD------------------------------------------------------
-
-      //-------------------------SUBMODULO DE Usuarios-------------------------
-      //listar Usuarios
-      Route::get('seguridad/usuarios',[UsuariosController::class, 'SPL_Usuarios']);
-
-      //agregar Usuarios
-      Route::post('seguridad/usuarios',[UsuariosController::class, 'SPA_Usuarios']);
-
-      //editar Usuarios
-      Route::put('seguridad/usuarios',[UsuariosController::class, 'SPM_Usuarios']);
-
-      //borrar Usuarios
-      Route::delete('seguridad/usuarios',[UsuariosController::class, 'SPB_Usuarios']); 
-
-      //agregar rol usuario
-      Route::post('seguridad/usuarios/rol',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
-
-      //listar usuarios por rol
-      Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
-
-      // borrar usuario rol
-      Route::delete('seguridad/usuarios/rol',[UsuariosController::class, 'SPB_UsuarioRol']);
-
-      //editar usuario por sucursal
-      Route::put('seguridad/usuarios/sucursal',[UsuariosController::class, 'SPM_UsuarioPorSucursal']);
+//TODO--------------------------------------HOME--------------------------------------------
+use App\Http\Controllers\Api\Home\Graficos;
 
 
-      //-------------------------SUBMODULO DE TipoRol-------------------------
+//TODO--------------------------------------LOGIN, TOKENS , MENUES--------------------------------------------
 
-      //agregar tipo rol
-      Route::post('seguridad/tiporoles',[tiporolController::class, 'SPA_TipoRol']);
+//LOGIN Y TOKENS
+Route::post('/usuario',[usuarioController::class, 'spValidarUsuario']);
 
-      //modificar tipo rol
-      Route::put('seguridad/tiporoles',[tiporolController::class, 'SPM_TipoRol']);
+//obtener usuario desde el token
+Route::get('/fnObtenerUsuDesdeBearer',[usuarioController::class, 'fnObtenerUsuDesdeBearer']);
 
-      //borrar tipo rol
-      Route::delete('seguridad/tiporoles',[tiporolController::class, 'SPB_TipoRol']);
+//menues
+Route::get('utils/menu',[menuController::class, 'SP_GetMenu']);
+//submenues
+Route::get('utils/menu/submenu',[menuController::class, 'SP_GetSubMenu']);
 
-      //listar tipo rol
-      Route::get('seguridad/tiporoles',[tiporolController::class, 'SPL_TipoRol']);
-
-      //habilitar tipo rol
-      Route::put('seguridad/tiporoles',[tiporolController::class, 'SPH_TipoRol']);
-
-
-      //-------------------------SUBMODULO DE RolModulo-------------------------
-
-      //listar rol modulo
-      Route::get('seguridad/rolmodulos',[rolModuloController::class, 'SPL_RolModulo']);
-
-      //agregar rol modulo
-      Route::post('seguridad/rolmodulos',[rolModuloController::class, 'SPA_RolModulo']);
-
-      //borrar rol modulo
-      Route::delete('seguridad/rolmodulos',[rolModuloController::class, 'SPB_RolModulo']);
-
-      //habilitar rol modulo
-      Route::put('seguridad/rolmodulos',[rolModuloController::class, 'SPH_RolModulo']);
+//ImagenSubMenu
+Route::get('utils/submenu/image',[menuController::class, 'SP_GetImagenSubMenu']);
 
 
-      //-------------------------SUBMODULO DE SistemaAPIs-------------------------
+//listar Usuarios
+Route::get('seguridad/usuarios',[UsuariosController::class, 'SPL_Usuarios']);
 
-      //sistema apis
-      Route::get('/SP_SistemaAPIs',[sistemaApiController::class, 'SP_SistemaAPIs']);
+//listar tipo rol
+Route::get('seguridad/tiporoles',[tiporolController::class, 'SPL_TipoRol']);
 
 
-      //TODO--------------------------------------MODULO DE PARAMETRIA------------------------------------------------------
+//listar rol modulo
+Route::get('seguridad/rolmodulos',[rolModuloController::class, 'SPL_RolModulo']);
+
+
 
       //-------------------------SUBMODULO DE TipoPersona-------------------------
       //listar tipo persona
@@ -200,6 +147,112 @@ Route::middleware('validarbearer')->group(function () {
       //listar Tipo Producto
       Route::get('parametria/tipoproducto',[TipoProductoController::class, 'SPL_TipoProducto']);
 
+      //listar Tipo Categoria
+      Route::get('parametria/tipocategoria',[TipoCategoriaController::class, 'SPL_TipoCategoria']);
+
+      //listar Tipo Impuesto
+      Route::get('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPL_TipoImpuesto']);
+
+      //listar Tipo FormaDePago
+      Route::get('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPL_TipoFormaDePago']);
+
+      //listar Tipo Sucursal
+      Route::get('parametria/sucursales',[SucursalController::class, 'SPL_Sucursal']);
+
+      //listar Producto
+      Route::get('gestion/inventario',[StockController::class, 'SPL_Producto']);
+
+      //listar TipoModulo
+      Route::get('parametria/tipomodulo',[TipoModuloController::class, 'SPL_TipoModulo']);
+      //lista persona extra
+      Route::get('lista/personas',[ListaPersonasController::class, 'SP_ListaPersonas']);
+
+      //lista localidades extra
+      Route::get('lista/localidad',[ListaLocalidadesController::class, 'SPL_Localidad']);
+
+      //lista provincias extra
+      Route::get('lista/provincia',[ListaProvinciasController::class, 'SPL_Provincia']);
+
+      //listar Personal
+      Route::get('recursos/personal',[PersonalController::class, 'SPL_Personal']);
+
+      //listar Cliente
+      Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
+      
+      //listar Proveedor
+      Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
+
+
+Route::middleware('validarbearer')->group(function () {
+
+      //--------------------------------------MODULO DE SEGURIDAD------------------------------------------------------
+
+      //-------------------------SUBMODULO DE Usuarios-------------------------
+
+
+      //agregar Usuarios
+      Route::post('seguridad/usuarios',[UsuariosController::class, 'SPA_Usuarios']);
+
+      //editar Usuarios
+      Route::put('seguridad/usuarios',[UsuariosController::class, 'SPM_Usuarios']);
+
+      //borrar Usuarios
+      Route::delete('seguridad/usuarios',[UsuariosController::class, 'SPB_Usuarios']); 
+
+      //agregar rol usuario
+      Route::post('seguridad/usuarios/rol',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
+
+      //listar usuarios por rol
+      Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
+
+      // borrar usuario rol
+      Route::delete('seguridad/usuarios/rol',[UsuariosController::class, 'SPB_UsuarioRol']);
+
+      //editar usuario por sucursal
+      Route::put('seguridad/usuarios/sucursal',[UsuariosController::class, 'SPM_UsuarioPorSucursal']);
+
+
+      //-------------------------SUBMODULO DE TipoRol-------------------------
+
+      //agregar tipo rol
+      Route::post('seguridad/tiporoles',[tiporolController::class, 'SPA_TipoRol']);
+
+      //modificar tipo rol
+      Route::put('seguridad/tiporoles',[tiporolController::class, 'SPM_TipoRol']);
+
+      //borrar tipo rol
+      Route::delete('seguridad/tiporoles',[tiporolController::class, 'SPB_TipoRol']);
+
+
+
+      //habilitar tipo rol
+      Route::put('seguridad/tiporoles',[tiporolController::class, 'SPH_TipoRol']);
+
+
+      //-------------------------SUBMODULO DE RolModulo-------------------------
+
+
+
+      //agregar rol modulo
+      Route::post('seguridad/rolmodulos',[rolModuloController::class, 'SPA_RolModulo']);
+
+      //borrar rol modulo
+      Route::delete('seguridad/rolmodulos',[rolModuloController::class, 'SPB_RolModulo']);
+
+      //habilitar rol modulo
+      Route::put('seguridad/rolmodulos',[rolModuloController::class, 'SPH_RolModulo']);
+
+
+      //-------------------------SUBMODULO DE SistemaAPIs-------------------------
+
+      //sistema apis
+      Route::get('/SP_SistemaAPIs',[sistemaApiController::class, 'SP_SistemaAPIs']);
+
+
+      //TODO--------------------------------------MODULO DE PARAMETRIA------------------------------------------------------
+
+
+
       //agregar Tipo Producto
       Route::post('parametria/tipoproducto',[TipoProductoController::class, 'SPA_TipoProducto']);
 
@@ -210,10 +263,8 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('parametria/tipoproducto',[TipoProductoController::class, 'SPB_TipoProducto']);
 
       //-------------------------SUBMODULO DE TipoCategoria-------------------------
-      //listar Tipo Categoria
-      Route::get('parametria/tipocategoria',[TipoCategoriaController::class, 'SPL_TipoCategoria']);
 
-      //agregar Tipo Categoria
+
       Route::post('parametria/tipocategoria',[TipoCategoriaController::class, 'SPA_TipoCategoria']);
 
       //editar Tipo Categoria
@@ -224,8 +275,7 @@ Route::middleware('validarbearer')->group(function () {
 
 
       //-------------------------SUBMODULO DE TipoImpuesto-------------------------
-      //listar Tipo Impuesto
-      Route::get('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPL_TipoImpuesto']);
+
 
       //agregar Tipo Impuesto
       Route::post('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPA_TipoImpuesto']);
@@ -237,8 +287,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPB_TipoImpuesto']);
 
       //-------------------------SUBMODULO DE FormaDePago-------------------------
-      //listar Tipo FormaDePago
-      Route::get('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPL_TipoFormaDePago']);
+
 
       //agregar Tipo FormaDePago
       Route::post('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPA_TipoFormaDePago']);
@@ -250,8 +299,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPB_TipoFormaDePago']);
 
       //-------------------------SUBMODULO DE Sucursal-------------------------
-      //listar Tipo Sucursal
-      Route::get('parametria/sucursales',[SucursalController::class, 'SPL_Sucursal']);
+
 
       //agregar Tipo Sucursal
       Route::post('parametria/sucursales',[SucursalController::class, 'SPA_Sucursal']);
@@ -263,14 +311,12 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('parametria/sucursales',[SucursalController::class, 'SPB_Sucursal']);
 
       //-------------------------SUBMODULO DE TipoModulo-------------------------
-      //listar TipoModulo
-      Route::get('parametria/tipomodulo',[TipoModuloController::class, 'SPL_TipoModulo']);
+
 
       //TODO--------------------------------------MODULO DE RECURSOS--------------------------------------------
 
       //-------------------------SUBMODULO DE Stock-------------------------
-      //listar Producto
-      Route::get('gestion/inventario',[StockController::class, 'SPL_Producto']);
+
 
       //agregar Producto
       Route::post('gestion/inventario',[StockController::class, 'SPA_Producto']);
@@ -287,17 +333,7 @@ Route::middleware('validarbearer')->group(function () {
 
       //-------------------------SUBMODULO DE Personal-------------------------
 
-      //lista persona extra
-      Route::get('lista/personas',[ListaPersonasController::class, 'SP_ListaPersonas']);
 
-      //lista localidades extra
-      Route::get('lista/localidad',[ListaLocalidadesController::class, 'SPL_Localidad']);
-
-      //lista provincias extra
-      Route::get('lista/provincia',[ListaProvinciasController::class, 'SPL_Provincia']);
-
-      //listar Personal
-      Route::get('recursos/personal',[PersonalController::class, 'SPL_Personal']);
 
       //agregar Personal
       Route::post('recursos/personal',[PersonalController::class, 'SPA_Personal']);
@@ -313,8 +349,7 @@ Route::middleware('validarbearer')->group(function () {
 
 
       //-------------------------SUBMODULO DE Cliente-------------------------
-      //listar Cliente
-      Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
+
 
       //agregar Cliente
       Route::post('recursos/clientes',[ClienteController::class, 'SPA_Clientes']);
@@ -330,8 +365,7 @@ Route::middleware('validarbearer')->group(function () {
 
 
       //-------------------------SUBMODULO DE Cliente-------------------------
-      //listar Proveedor
-      Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
+
 
       //agregar Proveedor
       Route::post('recursos/proveedores',[ProveedorController::class, 'SPA_Proveedor']);
@@ -345,5 +379,25 @@ Route::middleware('validarbearer')->group(function () {
       //habilitar Proveedor
       Route::put('recursos/proveedores',[ProveedorController::class, 'SPH_Proveedor']);
 
-      //hasta aca anda todo falta agregar el modulo de recursos
 });
+
+//TODO--------------------------------------MODULO DE HOME--------------------------------------------
+//obtener cantidad de personal por sucursal
+Route::get('SPG_ObtenerCantPersonalPorSucursal',[Graficos::class, 'SPG_ObtenerCantPersonalPorSucursal']);
+
+//obtener cantidad de personal total de la empresa
+Route::get('SPG_ObtenerCantPersonalTotal',[Graficos::class, 'SPG_ObtenerCantPersonalTotal']);
+
+//obtener stock total de cada sucursal
+Route::get('SPG_ObtenerStockSucursal',[Graficos::class, 'SPG_ObtenerStockSucursal']);
+
+//obtener stock total por cada sucursal de una categoria
+Route::get('SPG_ObtenerStockSucursalPorCategoria',[Graficos::class, 'SPG_ObtenerStockSucursalPorCategoria']);
+
+//obtener cantidad de productos totales que tiene la empresa
+Route::get('SPG_ObtenerCantProductos',[Graficos::class, 'SPG_ObtenerCantProductos']);
+
+//obtener stock total de cada sucursal
+Route::get('SPG_ObtenerCantProductosPorSucursal',[Graficos::class, 'SPG_ObtenerCantProductosPorSucursal']);
+
+//hasta aca anda todo falta agregar el modulo de recursos
