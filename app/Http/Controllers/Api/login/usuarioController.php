@@ -62,14 +62,17 @@ class usuarioController extends Controller
             'Token' => $token,
             'TiempoCaduca' => $datosToken['TiempoCaduca'],
             'NombrePersonal' => $datosToken['NombrePersonal'],
+            'UsuarioPersonal' => $datosToken['UsuarioPersonal'],
             'DocumentacionPersonal' => $datosToken['DocumentacionPersonal'],
+            'SucursalId' => $datosToken['SucursalId'],
             'SucursalPersonal' => $datosToken['SucursalPersonal'],
+            'UsuarioId' => $datosToken['UsuarioId'],
         ], 200);
 
     }
 
     private function obtenerIdPersona($usuario) {
-        
+
         // Consulta SQL para obtener el ID de la persona
         $idPersona = DB::table('Usuario')
           ->join('Persona', 'Usuario.IdPersona', '=', 'Persona.IdPersona')
@@ -77,10 +80,10 @@ class usuarioController extends Controller
           ->select('Persona.IdPersona')
           ->first()
           ->IdPersona;
-      
+
         return $idPersona; // ID de la persona del usuario encontrado
       }
-      
+
 
 
     private function SPA_UsuarioToken($idPersona, $token) {
@@ -91,16 +94,22 @@ class usuarioController extends Controller
         $Mensaje = $resultados[0]->Mensaje;
         $TiempoCaduca = $resultados[0]->TiempoCaduca;
         $NombrePersonal = $resultados[0]->NombrePersonal;
+        $UsuarioPersonal = $resultados[0]->UsuarioPersonal;
         $DocumentacionPersonal = $resultados[0]->DocumentacionPersonal;
+        $SucursalId = $resultados[0]->SucursalId;
         $SucursalPersonal = $resultados[0]->SucursalPersonal;
+        $UsuarioId = $resultados[0]->UsuarioId;
 
         // Devolver todos los datos en un array asociativo
         return [
             'Mensaje' => $Mensaje,
             'TiempoCaduca' => $TiempoCaduca,
             'NombrePersonal' => $NombrePersonal,
+            'UsuarioPersonal' => $UsuarioPersonal,
             'DocumentacionPersonal' => $DocumentacionPersonal,
+            'SucursalId' => $SucursalId,
             'SucursalPersonal' => $SucursalPersonal,
+            'UsuarioId' => $UsuarioId
         ];
     }
 
