@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class StockController extends Controller
 {
@@ -56,12 +57,6 @@ class StockController extends Controller
                 'Aumentos' => $resultados,
             ], 200);
         } catch (\Exception $e) {
-            \Log::error('Error al ejecutar la consulta', [
-                'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'trace' => $e->getTraceAsString()
-            ]);
             return response()->json([
                 'Message' => 'Error al ejecutar la consulta',
                 'Errors' => $e->getMessage(),

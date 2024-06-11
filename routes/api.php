@@ -224,7 +224,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('seguridad/tiporoles',[tiporolController::class, 'SPB_TipoRol']);
 
       //habilitar tipo rol
-      Route::put('seguridad/tiporoles',[tiporolController::class, 'SPH_TipoRol']);
+      Route::put('seguridad/tiporoles/habilitar',[tiporolController::class, 'SPH_TipoRol']);
 
 
       //-------------------------SUBMODULO DE RolModulo-------------------------
