@@ -306,4 +306,57 @@ class StockController extends Controller
             ], 400);
         }
     }
+
+    public function SPA_AgregarStock(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdProducto' => 'required|integer',
+            'Cantidad' => 'required|integer',
+            'Token' => 'required|string',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->Errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $idProducto = $request->input('IdProducto');
+        $Cantidad = $request->input('Cantidad');
+        $Token = $request->input('Token');
+
+        // echo $idProducto .' '. $Cantidad  . '' . $Token;
+
+        // Ejecutar el procedimiento almacenado SPH_Producto
+        $resultados = DB::select('CALL SPA_AgregarStock(?,?,?)', [
+            $idProducto,
+            $Cantidad,
+            $Token
+        ]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+
+
+
+    }
+
+
 }
