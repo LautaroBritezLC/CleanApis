@@ -107,83 +107,83 @@ Route::get('seguridad/rolmodulos',[rolModuloController::class, 'SPL_RolModulo'])
 
 
 
-      //-------------------------SUBMODULO DE TipoPersona-------------------------
-      //listar tipo persona
-      Route::get('parametria/tipopersona',[tipoPersonaController::class, 'SPL_TipoPersona']);
+//-------------------------SUBMODULO DE TipoPersona-------------------------
+//listar tipo persona
+Route::get('parametria/tipopersona',[tipoPersonaController::class, 'SPL_TipoPersona']);
 
-      //-------------------------SUBMODULO DE TipoDocumentacion-------------------------
-      //listar tipo Documentacion
-      Route::get('parametria/tipodocumentacion',[TipoDocumentacionController::class, 'SPL_TipoDocumentacion']);
+//-------------------------SUBMODULO DE TipoDocumentacion-------------------------
+//listar tipo Documentacion
+Route::get('parametria/tipodocumentacion',[TipoDocumentacionController::class, 'SPL_TipoDocumentacion']);
 
-      //-------------------------SUBMODULO DE TipoMedida-------------------------
-      //listar tipo Medida
-      Route::get('parametria/tipomedida',[TipoMedidaController::class, 'SPL_TipoMedida']);
+//-------------------------SUBMODULO DE TipoMedida-------------------------
+//listar tipo Medida
+Route::get('parametria/tipomedida',[TipoMedidaController::class, 'SPL_TipoMedida']);
 
-      //-------------------------SUBMODULO DE TipoDomicilio-------------------------
-      //listar tipo Domicilio
-      Route::get('parametria/tipodomicilio',[TipoDomicilioController::class, 'SPL_TipoDomicilio']);
+//-------------------------SUBMODULO DE TipoDomicilio-------------------------
+//listar tipo Domicilio
+Route::get('parametria/tipodomicilio',[TipoDomicilioController::class, 'SPL_TipoDomicilio']);
 
-      //-------------------------SUBMODULO DE TipoFactura-------------------------
-      //listar tipo Factura
-      Route::get('parametria/tipofactura',[TipoFacturaController::class, 'SPL_TipoFactura']);
+//-------------------------SUBMODULO DE TipoFactura-------------------------
+//listar tipo Factura
+Route::get('parametria/tipofactura',[TipoFacturaController::class, 'SPL_TipoFactura']);
 
-      //-------------------------SUBMODULO DE TipoDestinatarioFactura-------------------------
-      //listar tipo DestinatarioFactura
-      Route::get('parametria/tipodestinatariofactura',[TipoDestinatarioFacturaController::class, 'SPL_TipoDestinatarioFactura']);
+//-------------------------SUBMODULO DE TipoDestinatarioFactura-------------------------
+//listar tipo DestinatarioFactura
+Route::get('parametria/tipodestinatariofactura',[TipoDestinatarioFacturaController::class, 'SPL_TipoDestinatarioFactura']);
 
-      //-------------------------SUBMODULO DE TipoTipoPermiso-------------------------
-      //listar tipo Permiso
-      Route::get('parametria/tipopermiso',[TipoPermisoController::class, 'SPL_TipoPermiso']);
+//-------------------------SUBMODULO DE TipoTipoPermiso-------------------------
+//listar tipo Permiso
+Route::get('parametria/tipopermiso',[TipoPermisoController::class, 'SPL_TipoPermiso']);
 
-      //-------------------------SUBMODULO DE TipoPermisoDetalle-------------------------
-      //listar tipo PermisoDetalle
-      Route::get('parametria/tipopermisodetalle',[TipoPermisoDetalleController::class, 'SPL_TipoPermisoDetalle']);
+//-------------------------SUBMODULO DE TipoPermisoDetalle-------------------------
+//listar tipo PermisoDetalle
+Route::get('parametria/tipopermisodetalle',[TipoPermisoDetalleController::class, 'SPL_TipoPermisoDetalle']);
 
-      //-------------------------SUBMODULO DE TipoPersonaSistema-------------------------
-      //listar tipo PersonaSistema
-      Route::get('parametria/tipopersonasistema',[TipoPersonaSistemaController::class, 'SPL_TipoPersonaSistema']);
+//-------------------------SUBMODULO DE TipoPersonaSistema-------------------------
+//listar tipo PersonaSistema
+Route::get('parametria/tipopersonasistema',[TipoPersonaSistemaController::class, 'SPL_TipoPersonaSistema']);
 
-      //-------------------------SUBMODULO DE TipoProducto-------------------------
-      //listar Tipo Producto
-      Route::get('parametria/tipoproducto',[TipoProductoController::class, 'SPL_TipoProducto']);
+//-------------------------SUBMODULO DE TipoProducto-------------------------
+//listar Tipo Producto
+Route::get('parametria/tipoproducto',[TipoProductoController::class, 'SPL_TipoProducto']);
 
-      //listar Tipo Categoria
-      Route::get('parametria/tipocategoria',[TipoCategoriaController::class, 'SPL_TipoCategoria']);
+//listar Tipo Categoria
+Route::get('parametria/tipocategoria',[TipoCategoriaController::class, 'SPL_TipoCategoria']);
 
-      //listar Tipo Impuesto
-      Route::get('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPL_TipoImpuesto']);
+//listar Tipo Impuesto
+Route::get('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPL_TipoImpuesto']);
 
-      //listar Tipo FormaDePago
-      Route::get('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPL_TipoFormaDePago']);
+//listar Tipo FormaDePago
+Route::get('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPL_TipoFormaDePago']);
 
-      //listar Tipo Sucursal
-      Route::get('parametria/sucursales',[SucursalController::class, 'SPL_Sucursal']);
+//listar Tipo Sucursal
+Route::get('parametria/sucursales',[SucursalController::class, 'SPL_Sucursal']);
 
-      //listar Producto
-      Route::get('gestion/inventario',[StockController::class, 'SPL_Producto']);
+//listar Producto
+Route::get('recursos/inventario',[StockController::class, 'SPL_Producto']);
 
-      //listar TipoModulo
-      Route::get('parametria/tipomodulo',[TipoModuloController::class, 'SPL_TipoModulo']);
-      //lista persona extra
-      Route::get('lista/personas',[ListaPersonasController::class, 'SP_ListaPersonas']);
+//listar TipoModulo
+Route::get('parametria/tipomodulo',[TipoModuloController::class, 'SPL_TipoModulo']);
+//lista persona extra
+Route::get('lista/personas',[ListaPersonasController::class, 'SP_ListaPersonas']);
 
-      //lista localidades extra
-      Route::get('lista/localidad',[ListaLocalidadesController::class, 'SPL_Localidad']);
+//lista localidades extra
+Route::get('lista/localidad',[ListaLocalidadesController::class, 'SPL_Localidad']);
 
-      //lista provincias extra
-      Route::get('lista/provincia',[ListaProvinciasController::class, 'SPL_Provincia']);
+//lista provincias extra
+Route::get('lista/provincia',[ListaProvinciasController::class, 'SPL_Provincia']);
 
-      //listar Personal
-      Route::get('recursos/personal',[PersonalController::class, 'SPL_Personal']);
+//listar Personal
+Route::get('recursos/personal',[PersonalController::class, 'SPL_Personal']);
 
-      //listar Cliente
-      Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
-      
-      //listar Proveedor
-      Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
+//listar Cliente
+Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
 
-      //agregar stock
-      Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
+//listar Proveedor
+Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
+
+//agregar stock
+Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
 Route::middleware('validarbearer')->group(function () {
 
@@ -264,7 +264,7 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Producto
       Route::delete('parametria/tipoproducto',[TipoProductoController::class, 'SPB_TipoProducto']);
 
-      Route::put('parametria/tipoproducto/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoProducto']);
+      Route::put('parametria/tipoproducto/habilitar',[TipoProductoController::class, 'SPH_TipoProducto']);
 
       //-------------------------SUBMODULO DE TipoCategoria-------------------------
 
@@ -277,7 +277,7 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Categoria
       Route::delete('parametria/tipocategoria',[TipoCategoriaController::class, 'SPB_TipoCategoria']);
 
-      Route::put('parametria/tipocategoria/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoCategoria']);
+      Route::put('parametria/tipocategoria/habilitar',[TipoCategoriaController::class, 'SPH_TipoCategoria']);
 
 
       //-------------------------SUBMODULO DE TipoImpuesto-------------------------
@@ -292,7 +292,7 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Impuesto
       Route::delete('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPB_TipoImpuesto']);
 
-      Route::put('parametria/tipoimpuesto/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoImpuesto']);
+      Route::put('parametria/tipoimpuesto/habilitar',[TipoImpuestoController::class, 'SPH_TipoImpuesto']);
 
       //-------------------------SUBMODULO DE FormaDePago-------------------------
 
@@ -341,6 +341,9 @@ Route::middleware('validarbearer')->group(function () {
 
       //habilitar Producto
       Route::put('recursos/inventario/habilitar',[StockController::class, 'SPH_Producto']);
+
+
+      Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
       Route::get('recursos/inventario/tipoaumento', [StockController::class, 'SPL_TipoAumento']);
 

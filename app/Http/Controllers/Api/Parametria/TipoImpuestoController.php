@@ -56,7 +56,7 @@ class TipoImpuestoController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'Detalle' => 'required|string|max:50',
-            'Porcentaje'=> 'required|integer|max:500',
+            'Porcentaje'=> 'required|numeric|max:500',
             'Token' => 'required|string|max:500',
         ]);
 
@@ -100,7 +100,7 @@ class TipoImpuestoController extends Controller
         $validator = Validator::make($request->all(), [
             'IdTipoImpuesto' => 'required|integer',
             'Detalle' => 'required|string|max:50',
-            'Porcentaje'=> 'required|integer|max:500',
+            'Porcentaje'=> 'required|numeric|max:500',
             'Token' => 'required|string|max:500',
         ]);
 

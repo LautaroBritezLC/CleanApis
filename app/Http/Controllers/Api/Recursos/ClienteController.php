@@ -59,6 +59,7 @@ class ClienteController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string|max:500',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -86,13 +87,14 @@ class ClienteController extends Controller
         $fechaNacimiento = $request->input('FechaNacimiento');
         $telefono = $request->input('Telefono');
         $idProvincia = $request->input('IdProvincia');
+        $Token = $request->input('Token');
 
         // // Echo de los datos obtenidos
         // echo 'IdTipoPersonaSistema: ' . $IdTipoPersonaSistema . ', IdTipoPersona: ' . $IdTipoPersona . ', IdTipoDomicilio: ' . $idTipoDomicilio . ', Calle: ' . $calle . ', Nro: ' . $nro . ', Piso: ' . $piso . ', IdLocalidad: ' . $idLocalidad . ', IdTipoDocumentacion: ' . $idTipoDocumentacion . ', Documentacion: ' . $documentacion . ', Nombre: ' . $nombre . ', Apellido: ' . $apellido . ', Mail: ' . $mail . ', RazonSocial: ' . $razonSocial . ', FechaNacimiento: ' . $fechaNacimiento . ', Telefono: ' . $telefono . ', IdProvincia: ' . $idProvincia . '<br>';
 
 
         // Ejecutar el procedimiento almacenado SPA_Clientes
-        $resultados = DB::select('CALL SPA_Clientes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $resultados = DB::select('CALL SPA_Clientes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $IdTipoPersona,
             $idTipoDomicilio,
             $calle,
@@ -107,7 +109,8 @@ class ClienteController extends Controller
             $razonSocial,
             $fechaNacimiento,
             $telefono,
-            $idProvincia
+            $idProvincia,
+            $Token
         ]);
 
         // Obtener el mensaje del resultado
@@ -150,6 +153,7 @@ class ClienteController extends Controller
             }],
             'Telefono' => 'required|string|min:10|max:45',
             'IdProvincia' => 'required|integer',
+            'Token' => 'required|string|max:500',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -178,11 +182,12 @@ class ClienteController extends Controller
         $fechaNacimiento = $request->input('FechaNacimiento');
         $telefono = $request->input('Telefono');
         $idProvincia = $request->input('IdProvincia');
+        $Token = $request->input('Token');
 
         // echo "IdCliente: $idCliente, IdTipoPersonaSistema: $idTipoPersonaSistema, IdTipoPersona: $idTipoPersona, IdTipoDomicilio: $idTipoDomicilio, Calle: $calle, Nro: $nro, Piso: $piso, IdLocalidad: $idLocalidad, IdTipoDocumentacion: $idTipoDocumentacion, Documentacion: $documentacion, Nombre: $nombre, Apellido: $apellido, Mail: $mail, RazonSocial: $razonSocial, FechaNacimiento: $fechaNacimiento, Telefono: $telefono, IdProvincia: $idProvincia";
 
         // Ejecutar el procedimiento almacenado SPM_Cliente
-        $resultados = DB::select('CALL SPM_Cliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $resultados = DB::select('CALL SPM_Cliente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $idCliente,
             $idTipoPersona,
             $idTipoDomicilio,
@@ -198,7 +203,8 @@ class ClienteController extends Controller
             $razonSocial,
             $fechaNacimiento,
             $telefono,
-            $idProvincia
+            $idProvincia,
+            $Token
         ]);
 
         // Obtener el mensaje del resultado
@@ -266,6 +272,7 @@ class ClienteController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdCliente' => 'required|integer',
+            'Token' => 'required|string|max:500'
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -279,9 +286,10 @@ class ClienteController extends Controller
 
         // Obtener el IdCliente del cuerpo de la solicitud
         $idCliente = $request->input('IdCliente');
-        
+        $Token = $request->input('Token');
+
         // Ejecutar el procedimiento almacenado SPH_Cliente
-        $resultados = DB::select('CALL SPH_Cliente(?)', [$idCliente]);
+        $resultados = DB::select('CALL SPH_Cliente(?, ?)', [$idCliente, $Token]);
 
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->v_Message;
