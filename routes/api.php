@@ -182,6 +182,8 @@ Route::get('seguridad/rolmodulos',[rolModuloController::class, 'SPL_RolModulo'])
       //listar Proveedor
       Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
 
+      //agregar stock
+      Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
 Route::middleware('validarbearer')->group(function () {
 
@@ -262,6 +264,8 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Producto
       Route::delete('parametria/tipoproducto',[TipoProductoController::class, 'SPB_TipoProducto']);
 
+      Route::put('parametria/tipoproducto/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoProducto']);
+
       //-------------------------SUBMODULO DE TipoCategoria-------------------------
 
 
@@ -272,6 +276,8 @@ Route::middleware('validarbearer')->group(function () {
 
       //borrar Tipo Categoria
       Route::delete('parametria/tipocategoria',[TipoCategoriaController::class, 'SPB_TipoCategoria']);
+
+      Route::put('parametria/tipocategoria/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoCategoria']);
 
 
       //-------------------------SUBMODULO DE TipoImpuesto-------------------------
@@ -286,6 +292,8 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Impuesto
       Route::delete('parametria/tipoimpuesto',[TipoImpuestoController::class, 'SPB_TipoImpuesto']);
 
+      Route::put('parametria/tipoimpuesto/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoImpuesto']);
+
       //-------------------------SUBMODULO DE FormaDePago-------------------------
 
 
@@ -297,6 +305,8 @@ Route::middleware('validarbearer')->group(function () {
 
       //borrar Tipo FormaDePago
       Route::delete('parametria/tipoformadepago',[TipoFormaDePagoController::class, 'SPB_TipoFormaDePago']);
+
+      Route::put('parametria/tipoformadepago/habilitar',[TipoFormaDePagoController::class, 'SPH_TipoFormaDePago']);
 
       //-------------------------SUBMODULO DE Sucursal-------------------------
 
@@ -310,6 +320,8 @@ Route::middleware('validarbearer')->group(function () {
       //borrar Tipo Sucursal
       Route::delete('parametria/sucursales',[SucursalController::class, 'SPB_Sucursal']);
 
+      Route::put('parametria/sucursales/habilitar',[SucursalController::class, 'SPH_Sucursal']);
+
       //-------------------------SUBMODULO DE TipoModulo-------------------------
 
 
@@ -319,17 +331,23 @@ Route::middleware('validarbearer')->group(function () {
 
 
       //agregar Producto
-      Route::post('gestion/inventario',[StockController::class, 'SPA_Producto']);
+      Route::post('recursos/inventario',[StockController::class, 'SPA_Producto']);
 
       //editar Producto
-      Route::put('gestion/inventario',[StockController::class, 'SPM_Producto']);
+      Route::put('recursos/inventario',[StockController::class, 'SPM_Producto']);
 
       //borrar Producto
-      Route::delete('gestion/inventario',[StockController::class, 'SPB_Producto']);
+      Route::delete('recursos/inventario',[StockController::class, 'SPB_Producto']);
 
       //habilitar Producto
-      Route::put('gestion/inventario',[StockController::class, 'SPH_Producto']);
+      Route::put('recursos/inventario/habilitar',[StockController::class, 'SPH_Producto']);
 
+      Route::get('recursos/inventario/tipoaumento', [StockController::class, 'SPL_TipoAumento']);
+
+      Route::get('recursos/inventario/aumentoporproducto', [StockController::class, 'AumentoPorProducto']);
+
+      Route::post('recursos/inventario/aumentoporproducto', [StockController::class, 'guardarAumentosProducto']);
+            
 
       //-------------------------SUBMODULO DE Personal-------------------------
 
@@ -345,7 +363,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('recursos/personal',[PersonalController::class, 'SPB_Personal']);
 
       //habilitar Personal
-      Route::put('recursos/personal',[PersonalController::class, 'SPH_Personal']);
+      Route::put('recursos/personal/habilitar',[PersonalController::class, 'SPH_Personal']);
 
 
       //-------------------------SUBMODULO DE Cliente-------------------------
@@ -361,7 +379,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('recursos/clientes',[ClienteController::class, 'SPB_Cliente']);
 
       //habilitar Cliente
-      Route::put('recursos/clientes',[ClienteController::class, 'SPH_Cliente']);
+      Route::put('recursos/clientes/habilitar',[ClienteController::class, 'SPH_Cliente']);
 
 
       //-------------------------SUBMODULO DE Cliente-------------------------
@@ -377,7 +395,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('recursos/proveedores',[ProveedorController::class, 'SPB_Proveedor']);
 
       //habilitar Proveedor
-      Route::put('recursos/proveedores',[ProveedorController::class, 'SPH_Proveedor']);
+      Route::put('recursos/proveedores/habilitar',[ProveedorController::class, 'SPH_Proveedor']);
 
 });
 
