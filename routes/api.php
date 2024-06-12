@@ -311,6 +311,15 @@ Route::put('/SPB_Producto',[StockController::class, 'SPB_Producto']);
 //habilitar Producto
 Route::put('/SPH_Producto',[StockController::class, 'SPH_Producto']);
 
+Route::get('/SPL_TipoAumento', [StockController::class, 'SPL_TipoAumento']);
+
+Route::get('/SPL_AumentoPorProducto', [StockController::class, 'AumentoPorProducto']);
+
+Route::post('/guardarAumentosProducto', [StockController::class, 'guardarAumentosProducto']);
+
+//agregar stock
+Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
+
 
 //-------------------------SUBMODULO DE Personal-------------------------
 

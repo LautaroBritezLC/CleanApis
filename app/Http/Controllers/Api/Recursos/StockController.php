@@ -9,6 +9,118 @@ use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
+    public function guardarAumentosProducto(Request $request)
+    {
+        $idProducto = $request->input('IdProducto');
+        $aumentos = $request->input('Aumentos');
+        $aumentoExtra = $request->input('AumentoExtra');
+    
+        try {
+            DB::statement('CALL SPM_AumentosProducto(?, ?, ?)', [
+                $idProducto, json_encode($aumentos), $aumentoExtra
+            ]);
+            return response()->json(['message' => 'Aumentos guardados exitosamente'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al guardar aumentos', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
+
+    
+
+    public function SPL_TipoAumento(Request $request) {
+        $resultados = DB::select('CALL SPL_TipoAumento()');
+
+        return response()->json([
+            'Message' => 'OK',
+            'Status' => 200,
+            'TiposAumento' => $resultados,
+        ], 200);
+    }
+    public function AumentoPorProducto(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'IdProducto' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        $idProducto = $request->query('IdProducto'); // Para solicitudes GET
+        try {
+            $resultados = DB::select('CALL SPL_AumentoPorProducto(?)', [$idProducto]);
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+                'Aumentos' => $resultados,
+            ], 200);
+        } catch (\Exception $e) {
+            \Log::error('Error al ejecutar la consulta', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json([
+                'Message' => 'Error al ejecutar la consulta',
+                'Errors' => $e->getMessage(),
+                'Status' => 500,
+            ], 500);
+        }
+    }
+    
+    public function SPA_AgregarStock(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'IdProducto' => 'required|integer',
+            'Cantidad' => 'required|integer',
+            'Token' => 'required|string',
+        ]);
+
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->Errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $idProducto = $request->input('IdProducto');
+        $Cantidad = $request->input('Cantidad');
+        $Token = $request->input('Token');
+
+        // echo $idProducto .' '. $Cantidad  . '' . $Token;
+
+        // Ejecutar el procedimiento almacenado SPH_Producto
+        $resultados = DB::select('CALL SPA_AgregarStock(?,?,?)', [
+            $idProducto,
+            $Cantidad,
+            $Token
+        ]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->v_Message;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+    }
+
     public function SPL_Producto(Request $request) {
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
@@ -43,6 +155,7 @@ class StockController extends Controller
         'IdTipoMedida' => 'required|integer',
         'IdTipoCategoria' => 'required|integer',
         'IdTipoProducto' => 'required|integer',
+        'IdProveedor' => 'required|integer',
         'Codigo' => 'required|string|min:8',
         'Nombre' => 'required|string|max:45',
         'Marca' => 'required|string|max:45',
@@ -66,6 +179,7 @@ class StockController extends Controller
     $IdTipoMedida = $request->input('IdTipoMedida');
     $idTipoCategoria = $request->input('IdTipoCategoria');
     $idTipoProducto = $request->input('IdTipoProducto');
+    $idProveedor = $request->input('IdProveedor');
     $codigo = $request->input('Codigo');
     $nombre = $request->input('Nombre');
     $marca = $request->input('Marca');
@@ -83,7 +197,7 @@ class StockController extends Controller
 
     // Ejecutar el procedimiento almacenado SPA_Producto
     $resultados = DB::select('CALL SPA_Producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-        $IdTipoMedida, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, $precioCosto, $Tamano, $cantMinima, $cantMaxima, $token
+        $IdTipoMedida, $idTipoCategoria, $idTipoProducto, $idProveedor, $codigo, $nombre, $marca, $precioCosto, $Tamano, $cantMinima, $cantMaxima, $token
     ]);
 
     // Obtener el mensaje del resultado
@@ -110,6 +224,7 @@ class StockController extends Controller
             'IdTipoMedida' => 'required|integer',
             'IdTipoCategoria' => 'required|integer',
             'IdTipoProducto' => 'required|integer',
+            'IdProveedor' => 'required|integer',
             'Codigo' => 'required|string|min:8',
             'Nombre' => 'required|string|max:45',
             'Marca' => 'required|string|max:45',
@@ -133,6 +248,7 @@ class StockController extends Controller
         $IdTipoMedida = $request->input('IdTipoMedida');
         $idTipoCategoria = $request->input('IdTipoCategoria');
         $idTipoProducto = $request->input('IdTipoProducto');
+        $idProveedor = $request->input('IdProveedor');
         $codigo = $request->input('Codigo');
         $nombre = $request->input('Nombre');
         $marca = $request->input('Marca');
@@ -144,7 +260,7 @@ class StockController extends Controller
 
         // Ejecutar el procedimiento almacenado SPM_Producto
         $resultados = DB::select('CALL SPM_Producto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-            $idProducto, $IdTipoMedida, $idTipoCategoria, $idTipoProducto, $codigo, $nombre, $marca, 
+            $idProducto, $IdTipoMedida, $idTipoCategoria, $idTipoProducto, $idProveedor , $codigo, $nombre, $marca, 
             $precioCosto, $Tamano, $cantMinima, $cantMaxima, $token
         ]);
 
