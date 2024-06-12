@@ -402,6 +402,7 @@ class StockController extends Controller
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->ResultMessage;
 
+        
         // Devolver la respuesta según el mensaje obtenido
         if ($mensaje === 'OK') {
             return response()->json([
