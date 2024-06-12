@@ -74,6 +74,8 @@ use App\Http\Controllers\Api\Listas\ListaLocalidadesController;
 
 use App\Http\Controllers\Api\Listas\ListaProvinciasController;
 
+use App\Http\Controllers\Api\Listas\LocalidadesPorProv;
+
 //TODO--------------------------------------HOME--------------------------------------------
 use App\Http\Controllers\Api\Home\Graficos;
 
@@ -182,6 +184,8 @@ Route::get('recursos/clientes',[ClienteController::class, 'SPL_Cliente']);
 //listar Proveedor
 Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor']);
 
+Route::get('recursos/inventario',[StockController::class, 'SPL_Producto']);
+
 //agregar stock
 Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
@@ -189,7 +193,11 @@ Route::get('recursos/inventario/tipoaumento', [StockController::class, 'SPL_Tipo
 
 Route::get('recursos/inventario/aumentoporproducto', [StockController::class, 'AumentoPorProducto']);
 
+
 Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
+
+
+Route::get('lista/localidadesporprov',[LocalidadesPorProv::class, 'SPL_LocalidadPorProvincia']);
 
 Route::middleware('validarbearer')->group(function () {
 
