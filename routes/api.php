@@ -245,7 +245,7 @@ Route::middleware('validarbearer')->group(function () {
       Route::delete('seguridad/rolmodulos',[rolModuloController::class, 'SPB_RolModulo']);
 
       //habilitar rol modulo
-      Route::put('seguridad/rolmodulos',[rolModuloController::class, 'SPH_RolModulo']);
+      Route::put('seguridad/rolmodulos/habilitar',[rolModuloController::class, 'SPH_RolModulo']);
 
 
       //-------------------------SUBMODULO DE SistemaAPIs-------------------------
