@@ -185,6 +185,12 @@ Route::get('recursos/proveedores',[ProveedorController::class, 'SPL_Proveedor'])
 //agregar stock
 Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
+Route::get('recursos/inventario/tipoaumento', [StockController::class, 'SPL_TipoAumento']);
+
+Route::get('recursos/inventario/aumentoporproducto', [StockController::class, 'AumentoPorProducto']);
+
+Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
+
 Route::middleware('validarbearer')->group(function () {
 
       //--------------------------------------MODULO DE SEGURIDAD------------------------------------------------------
@@ -203,9 +209,6 @@ Route::middleware('validarbearer')->group(function () {
 
       //agregar rol usuario
       Route::post('seguridad/usuarios/rol',[UsuariosController::class, 'SPA_AgregarRolUsuario']);
-
-      //listar usuarios por rol
-      Route::get('seguridad/usuarios/rol',[UsuariosController::class, 'SP_ListaUsuariosRol']);
 
       // borrar usuario rol
       Route::delete('seguridad/usuarios/rol',[UsuariosController::class, 'SPB_UsuarioRol']);
@@ -345,11 +348,7 @@ Route::middleware('validarbearer')->group(function () {
 
       Route::post('recursos/inventario/stock',[StockController::class, 'SPA_AgregarStock']);
 
-      Route::get('recursos/inventario/tipoaumento', [StockController::class, 'SPL_TipoAumento']);
-
-      Route::get('recursos/inventario/aumentoporproducto', [StockController::class, 'AumentoPorProducto']);
-
-      Route::post('recursos/inventario/aumentoporproducto', [StockController::class, 'guardarAumentosProducto']);
+      Route::post('recursos/inventario/agregaraumento', [StockController::class, 'guardarAumentosProducto']);
             
 
       //-------------------------SUBMODULO DE Personal-------------------------
