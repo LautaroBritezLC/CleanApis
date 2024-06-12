@@ -6,19 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class StockController extends Controller
 {
     public function guardarAumentosProducto(Request $request)
+
+    
     {
+
         $idProducto = $request->input('IdProducto');
         $aumentos = $request->input('Aumentos');
         $aumentoExtra = $request->input('AumentoExtra');
+        $token = $request->input('Token');
 
         try {
-            DB::statement('CALL SPM_AumentosProducto(?, ?, ?)', [
-                $idProducto, json_encode($aumentos), $aumentoExtra
+            DB::statement('CALL SPM_AumentosProducto(?, ?, ?, ?)', [
+                $idProducto, json_encode($aumentos), $aumentoExtra , $token 
             ]);
             return response()->json(['message' => 'Aumentos guardados exitosamente'], 200);
         } catch (\Exception $e) {
@@ -177,6 +180,7 @@ class StockController extends Controller
             'Tamano' => 'required|numeric|min:0',
             'CantMinima' => 'required|integer|min:0',
             'CantMaxima' => 'required|integer|min:0',
+            'Token' => 'required|string',
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -354,9 +358,62 @@ class StockController extends Controller
             ], 400);
         }
 
-
-
     }
 
+    public function SPM_AumentoEnMasa(Request $request) {
+        // Validar los datos de entrada
+        $validator = Validator::make($request->all(), [
+            'productos' => 'required|array',
+            'productos.*.IdProducto' => 'nullable|integer',
+            'productos.*.PrecioCosto' => 'nullable|numeric',
+            'PorcentajeExtra' => 'required|numeric',
+            'Token' => 'required|string',
+        ]);
 
+        // Si la validación falla, devolver la respuesta correspondiente
+        if ($validator->fails()) {
+            return response()->json([
+                'Message' => 'Error en la validación de los datos',
+                'Errors' => $validator->errors(),
+                'Status' => 400,
+            ], 400);
+        }
+
+        // Obtener los datos del cuerpo de la solicitud
+        $productos = $request->input('productos');
+        $porcentajeExtra = $request->input('PorcentajeExtra');
+        $token = $request->input('Token');
+
+        // Construir el array de objetos JSON en el formato requerido
+        $json_array = [];
+        $json_array[] = ['Token' => $token];
+        $json_array[] = ['PorcentajeExtra' => $porcentajeExtra];
+        foreach ($productos as $producto) {
+            $json_array[] = $producto;
+        }
+
+        // Convertir el array a JSON
+        $json_data = json_encode($json_array);
+
+        // echo $json_data;
+        // Ejecutar el procedimiento almacenado SPM_AumentoEnMasa
+        $resultados = DB::select('CALL SPM_AumentoEnMasa(?)', [$json_data]);
+
+        // Obtener el mensaje del resultado
+        $mensaje = $resultados[0]->ResultMessage;
+
+        // Devolver la respuesta según el mensaje obtenido
+        if ($mensaje === 'OK') {
+            return response()->json([
+                'Message' => 'OK',
+                'Status' => 200,
+            ], 200);
+        } else {
+            return response()->json([
+                'Message' => $mensaje,
+                'Status' => 400,
+            ], 400);
+        }
+
+        }
 }
