@@ -235,6 +235,7 @@ class StockController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdProducto' => 'required|integer',
+            'Token' => 'required|string',            
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -248,10 +249,12 @@ class StockController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $idProducto = $request->input('IdProducto');
+        $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPB_Producto
-        $resultados = DB::select('CALL SPB_Producto(?)', [
-            $idProducto
+        $resultados = DB::select('CALL SPB_Producto(?,?)', [
+            $idProducto,
+            $token
         ]);
 
         // Obtener el mensaje del resultado
@@ -275,6 +278,7 @@ class StockController extends Controller
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'IdProducto' => 'required|integer',
+            'Token' => 'required|string',    
         ]);
 
         // Si la validación falla, devolver la respuesta correspondiente
@@ -288,10 +292,12 @@ class StockController extends Controller
 
         // Obtener los datos del cuerpo de la solicitud
         $idProducto = $request->input('IdProducto');
+        $token = $request->input('Token');
 
         // Ejecutar el procedimiento almacenado SPH_Producto
-        $resultados = DB::select('CALL SPH_Producto(?)', [
-            $idProducto
+        $resultados = DB::select('CALL SPH_Producto(?,?)', [
+            $idProducto,
+            $token
         ]);
 
         // Obtener el mensaje del resultado
@@ -402,7 +408,6 @@ class StockController extends Controller
         // Obtener el mensaje del resultado
         $mensaje = $resultados[0]->ResultMessage;
 
-        
         // Devolver la respuesta según el mensaje obtenido
         if ($mensaje === 'OK') {
             return response()->json([
