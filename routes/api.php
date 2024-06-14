@@ -349,6 +349,8 @@ Route::middleware('validarbearer')->group(function () {
 
       //borrar Producto
       Route::delete('recursos/inventario',[StockController::class, 'SPB_Producto']);
+      
+      Route::put('recursos/inventario/aumentoEnMasa', [StockController::class, 'SPM_AumentoEnMasa']);
 
       //habilitar Producto
       Route::put('recursos/inventario/habilitar',[StockController::class, 'SPH_Producto']);

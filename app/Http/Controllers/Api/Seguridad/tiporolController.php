@@ -180,15 +180,6 @@ class tiporolController extends Controller
 
         // Ejecutar el procedimiento almacenado SPL_TipoRol
         $resultado = DB::select('CALL SPL_TipoRol(?)', [$tipoLista]);
-
-        // Verificar si el resultado está vacío
-        if (empty($resultado)) {
-            return response()->json([
-                'Message' => 'Error al ejecutar el procedimiento almacenado',
-                'Status' => 400,
-            ], 400);
-        }
-
         
 
         // Devolver los resultados como respuesta
