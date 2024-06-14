@@ -19,7 +19,7 @@ class ValidarBearerMiddleware
 
         if ($mensajeValidacion !== 'Ok') {
             return response()->json([
-                'mensajeValidacion' => 'No posee permisos para realizar la acción',
+                'Message' => 'No posee permisos para realizar la acción',
                 'Status' => 400,
             ], 400);
         }
